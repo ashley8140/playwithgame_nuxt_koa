@@ -12,11 +12,9 @@
                 </nuxt-link>
             </ul>
         </div>
+
         <div class="right">
-            <keep-alive>
-                <router-view v-if="$route.meta.keepAlive"></router-view>
-            </keep-alive>
-            <router-view v-if="!$route.meta.keepAlive"></router-view>
+            <nuxt-child keep-alive></nuxt-child>
         </div>
     </div>
 </template>
@@ -33,16 +31,16 @@
         computed: {
             ...mapState(['hunterUserCenterNav'])
         },
-        created () {
+        created() {
             console.log("用户中心 created")
         },
-        mounted () {
+        mounted() {
             console.log("用户中心 mounted")
         },
-        activated () {
+        activated() {
             console.log("用户中心 activated")
         },
-        destroyed () {
+        destroyed() {
             console.log("用户中心destoryed")
         }
     }
@@ -78,6 +76,7 @@
                 border-bottom: 1px solid #EBEBEB;
                 cursor: pointer;
                 background: #fff;
+
                 &.navIsActive {
                     color: #fff;
                     background: #FF4C2E;

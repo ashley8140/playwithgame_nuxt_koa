@@ -3,11 +3,11 @@
         <div class="container" >
             <p class="p1">首页 > <span style="color:#FF4C2E;">APP下载</span></p>
             <div style="margin-top: 100px;">
-                <img width=485 src="/static/imgs/e.png" alt="">
+                <img width=485 src="../assets/imgs/e.png" alt="">
             </div>
             <div class="code" style="margin-top: 93px;">
-                <div style="margin-right:60px;"><img src="/static/imgs/timg.jpg" width=236 height=236 alt=""></div>
-                <div><img src="/static/imgs/timg.jpg" width=236 height=236 alt=""></div>
+                <div style="margin-right:60px;"><img src="../assets/imgs/timg.jpg" width=236 height=236 alt=""></div>
+                <div><img src="../assets/imgs/timg.jpg" width=236 height=236 alt=""></div>
             </div>
         </div>
     </div>
@@ -50,7 +50,7 @@
 
     .download {
         height: 828px;
-        background: url('/static/imgs/bg.png') no-repeat top left;
+        background: url('../assets/imgs/bg.png') no-repeat top left;
         background-size: 100%;
     }
     .code > div {

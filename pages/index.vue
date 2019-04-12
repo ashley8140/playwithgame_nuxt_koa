@@ -1,6 +1,7 @@
 <template>
     <div>
-        <div id="slide" class="swiper-container" style="width: 100%;min-width: 1200px;">
+        <div id="slide" v-if="slide.length > 0" v-swiper:mySwiper="swiperOption" class="swiper-container"
+            style="width: 100%;min-width: 1200px;">
             <div class="swiper-wrapper">
                 <div class="swiper-slide" v-for="(item, index) in slide" :key=index>
                     <img :src=item.slide_pic>
@@ -13,29 +14,32 @@
         <div class="white">
             <div class="container">
                 <div class="main center">
-                    <p class="p1"> <img width=27 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADYAAAA2BAMAAAB+a3fuAAAAMFBMVEUAAAD/Sy3/QiP/Sy3/Siz/Syz/Lyb/Syz/SSn/Sy3/TC7/TC7/Sy3/Sy3/SSv/TC4E2MQsAAAAD3RSTlMA2A75j1IGlSv01L27mCqlOtR5AAAAk0lEQVQ4y2MYCPBE+P9/Qz8UNgyk/weDayhsCGA7D+H/TkBhgwH7fygoQGGDQfP/j0EMDKry/y1Q2GDg/18IRCn+/4LCBgP5/wEgivX/RxQ2GNj/VwBRTP8/o7DB4P9/BI1g00wOYf9PZDaaH34hs/H5HV+Y4QtrfHGEL25hoAWYDmZ5oLCJBqPpczR9jqT0SQYAAMcTjYBs5f+AAAAAAElFTkSuQmCC"
+                    <p class="p1"> <img width=27
+                            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADYAAAA2BAMAAAB+a3fuAAAAMFBMVEUAAAD/Sy3/QiP/Sy3/Siz/Syz/Lyb/Syz/SSn/Sy3/TC7/TC7/Sy3/Sy3/SSv/TC4E2MQsAAAAD3RSTlMA2A75j1IGlSv01L27mCqlOtR5AAAAk0lEQVQ4y2MYCPBE+P9/Qz8UNgyk/weDayhsCGA7D+H/TkBhgwH7fygoQGGDQfP/j0EMDKry/y1Q2GDg/18IRCn+/4LCBgP5/wEgivX/RxQ2GNj/VwBRTP8/o7DB4P9/BI1g00wOYf9PZDaaH34hs/H5HV+Y4QtrfHGEL25hoAWYDmZ5oLCJBqPpczR9jqT0SQYAAMcTjYBs5f+AAAAAAElFTkSuQmCC"
                             alt=""> 精品服务</p>
-                    <!--    <p class="p2">BOUTIQUE SERVICE</p>
-                    <hr color=#FF4C2E class="line"> -->
+                    <p class="p2" style="margin-top:-20px">BOUTIQUE SERVICE</p>
+                    <hr color=#FF4C2E class="line">
                     <ul class="service">
                         <!-- path query -->
-                        <nuxt-link v-for="(item, index) in gameList" :key="index" :to="{name:'findPeople',params:{key: item.key}}"
-                            tag="li" class="item point">
-                            <img class="img" @mouseover="curIndex=index" :class="{'big': curIndex == index}" :src="item.web_logo1">
+                        <nuxt-link v-for="(item, index) in gameList" :key="index"
+                            :to="{name:'findPeople',params:{key: item.key}}" tag="li" class="item point">
+                            <img class="img" @mouseover="curIndex=index" :class="{'big': curIndex == index}"
+                                :src="item.web_logo1">
                             <p>{{item.title}}</p>
                         </nuxt-link>
                     </ul>
-                    <nuxt-link tag="span" class="more" :to="{name:'findPeople',params:{key: defaultkey}}">MORE>></nuxt-link>
+                    <nuxt-link tag="span" class="more" :to="{name:'findPeople'}">MORE>>
+                    </nuxt-link>
                 </div>
             </div>
         </div>
         <div class="container center">
             <div class="game_list">
                 <ul>
-                    <div v-for="(item, index) in gameList" :key="index" v-if="item.lists.length !== 0">
+                    <div v-for="(item, index) in gameList" :key="index">
                         <p class="p1"> <img width=27 :src=item.web_logo2 alt=""> {{item.title}}</p>
                         <ul class="game">
-                            <li tag="li" class="item" v-for="(i, index) in item.lists" :key=index v-if="index < 4">
+                            <li tag="li" class="item" v-for="(i, index) in item.lists" :key=index>
                                 <nuxt-link :to="{name:'hunterInfo', params:{touid: i.user_id,key:item.key}}"
                                     class="point">
                                     <img class="pic" :src=i.avatar alt="">
@@ -45,14 +49,14 @@
                                     <div style="overflow: hidden">
                                         <span class="name fl">{{i.nickname}}</span>
                                         <span class="zs fr v_level">
-                                            <img v-for="(item, index) in v_level[i.v_level]" :key=index :src="base64[item]"
-                                                alt="">
+                                            <img v-for="(item, index) in v_level[i.v_level]" :key=index
+                                                :src="base64[item]" alt="">
                                         </span>
                                     </div>
-                                    <div style="overflow: hidden;" class="point" @click="controlPlay('v'+i.user_id)"
-                                        >
-                                        <span class="voice fl"><img v-show="i.sex==1" src="/static/imgs/yy_male.png"
-                                                alt=""><img v-show="i.sex==2" src="/static/imgs/yy_female.png" alt=""></span>
+                                    <div style="overflow: hidden;" class="point" @click="controlPlay('v'+i.user_id)">
+                                        <span class="voice fl"><img v-show="i.sex==1" src="../assets/imgs/yy_male.png"
+                                                alt=""><img v-show="i.sex==2" src="../assets/imgs/yy_female.png"
+                                                alt=""></span>
                                         <span class="price fr">¥ <span>{{i.min_price}}/小时</span></span>
                                         <audio :src=i.voice :class="'v'+i.user_id">
                                             您的浏览器不支持
@@ -61,13 +65,15 @@
                                     </div>
                                 </div>
                             </li>
-                            <nuxt-link tag="span" class="more" :to="{name:'findPeople',params:{key: item.key}}">MORE>></nuxt-link>
+                            <nuxt-link tag="span" class="more" :to="{name:'findPeople',params:{key: item.key}}">MORE>>
+                            </nuxt-link>
                         </ul>
                     </div>
                 </ul>
                 <div class="game_logo">
-                    <nuxt-link tag="img" class="point" width=27 v-for="(item, index) in gameList" :key=index :src=item.web_logo2
-                        alt="" :to="{name:'findPeople',params:{key: item.key}}"></nuxt-link>
+                    <nuxt-link v-show="item.lists.length > 0" tag="img" class="point" width=27
+                        v-for="(item, index) in gameList" :key=index :src=item.web_logo2 alt=""
+                        :to="{name:'findPeople',params:{key: item.key}}"></nuxt-link>
                 </div>
             </div>
         </div>
@@ -78,7 +84,8 @@
         mapState,
         mapMutations
     } from 'vuex';
-    import utils from '../assets/js/utils.js';;
+    import utils from '../assets/js/utils.js';
+
     export default {
         data() {
             return {
@@ -88,10 +95,29 @@
                 ],
                 gameList: [],
                 curIndex: 0,
+                swiperOption: {
+                    autoplay: {
+                        delay: 2000,
+                        disableOnInteraction: false
+                    },
+                    speed: 500,
+                    loop: true,
+                    pagination: {
+                        el: '.swiper-pagination',
+                        type: 'bullets',
+                        clickable: true,
+                    },
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    },
+                    observer: true, //修改swiper自己或子元素时，自动初始化swiper
+                    observeParents: true //修改swiper的父元素时，自动初始化swiper
+                }
             }
         },
         computed: {
-            ...mapState(["hasToken", "v_level", 'base64','defaultkey']),
+            ...mapState(["hasToken", "v_level", 'base64', 'defaultkey']),
         },
 
         methods: {
@@ -105,7 +131,7 @@
                 audio.play();
             },
             getGameList() {
-                this.$axios.get("index",{
+                this.$axios.get("index", {
                     auth: false
                 }).then((data) => {
                     var d = data.data;
@@ -113,36 +139,17 @@
                         d = d.data
                         this.slide = d.slide
                         this.gameList = d.game;
-                        utils.setItem('defaultkey', d.game[0].key)
-                        this.UPDATEDEFAULTKEY(this.gameList[0].key);
-                        this.$nextTick(function () {
-                            this.initSwiper()
-                        })
+/*                         utils.setItem('defaultkey', d.game[0].key)
+                        this.UPDATEDEFAULTKEY(this.gameList[0].key); */
                     }
                 })
             },
-            initSwiper() {
-                var mySwiper = new Swiper('#slide', {
-                    autoplay: true,
-                    loop: true,
-                    pagination: {
-                        el: '.swiper-pagination',
-                    },
-                    navigation: {
-                        nextEl: '.swiper-button-next',
-                        prevEl: '.swiper-button-prev',
-                    },
-                    observer: true, //修改swiper自己或子元素时，自动初始化swiper
-                    observeParents: true //修改swiper的父元素时，自动初始化swiper
-                })
-            }
-
         },
         created() {
-            this.getGameList();
+
         },
         mounted() {
-
+            this.getGameList()
         },
     }
 
@@ -151,24 +158,29 @@
     #slide {
         position: relative;
 
-        .swiper-slide {
+        /*   .swiper-slide {
             img {
                 width: 100%;
             }
+        } */
+        .swiper-pagination {
+            width: 100%;
+            text-align: center;
+            bottom: 20px;
         }
 
         .swiper-pagination-bullet {
-            width: 6px;
-            height: 6px;
+
             background: rgba(255, 255, 255, 1);
             opacity: 0.5;
             border-radius: 50%;
+            margin-right: 5px;
 
         }
 
         .swiper-pagination-bullet-active {
             width: 30px;
-            height: 6px;
+            height: 8px;
             background: rgba(255, 255, 255, 1);
             border-radius: 3px;
             opacity: 1;
@@ -308,8 +320,6 @@
     .line {
         width: 74px;
         display: inline-block;
-        position: relative;
-        top: -12px;
     }
 
     .main {

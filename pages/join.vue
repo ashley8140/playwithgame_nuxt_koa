@@ -7,7 +7,7 @@
             </p>
             <div class="avatar_box cf">
                 <div class="d d1">
-                    <img src="/static/imgs/sl@2x.png" alt="">
+                    <img src="../assets/imgs/sl@2x.png" alt="">
                     <p class="t1">头像示例</p>
                     <p style="font-size: 12px;color: #999;margin-top:5px;">必须是本人正面清晰照</p>
                 </div>
@@ -89,7 +89,7 @@
                 <div class="cf center">
                     <div class="fl">
                         <div>
-                            <img class="pic" src="/static/imgs/jt@2x.png" alt="截图示例">
+                            <img class="pic" src="../assets/imgs/jt@2x.png" alt="截图示例">
                         </div>
                         <p class="p2">截图示例</p>
                         <p class="p3">

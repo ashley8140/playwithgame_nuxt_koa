@@ -5,7 +5,7 @@
         <div style="padding-left: 20px;">
             <p class="p2">一、等级说明</p>
             <p class="p3">
-                猎人等级是猎人在陪玩平台的成长体系，体现猎人在猎游的服务质量，等级标识从低级到高级依次是：<img src="/static/imgs/tb@2x.png" alt="">
+                猎人等级是猎人在陪玩平台的成长体系，体现猎人在猎游的服务质量，等级标识从低级到高级依次是：<img src="../assets/imgs/tb@2x.png" alt="">
             </p>
 
             <p class="p2">二、等级划分规则</p>
@@ -15,7 +15,7 @@
         </div>
 
 
-        <img src="/static/imgs/gz@2x.png" style="display: block;margin: 20px auto 110px" alt="">
+        <img src="../assets/imgs/gz@2x.png" style="display: block;margin: 20px auto 110px" alt="">
     </div>
 </template>
 <script>

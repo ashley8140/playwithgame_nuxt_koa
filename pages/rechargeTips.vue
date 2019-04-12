@@ -17,7 +17,7 @@
         </div>
 
 
-        <img src="/static/imgs/dj@2x.png" style="display: block;margin: 20px auto 110px" alt="">
+        <img src="../assets/imgs/dj@2x.png" style="display: block;margin: 20px auto 110px" alt="">
     </div>
 </template>
 <script>

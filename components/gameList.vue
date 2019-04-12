@@ -6,14 +6,14 @@
                     <img class="pic point" :src=item.auth_avatar alt="">
                 </router-link>
 
-                <span class="discounted"><img src="/static/imgs/zk@2x.png" alt=""></span>
+                <span class="discounted"><img :src=base64.zk alt=""></span>
                 <span class="voice fl point" @click="controlPlay('v'+item.user_id)">
                     <audio :src=item.voice :class="'v'+item.user_id">
                         您的浏览器不支持
                         audio 标签
                     </audio>
-                    <img v-show="item.sex==1" src="/static/imgs/yy_male.png" alt="">
-                    <img v-show="item.sex==2" src="/static/imgs/yy_female.png" alt="">
+                    <img v-show="item.sex==1" src="../assets/imgs/yy_male.png" alt="">
+                    <img v-show="item.sex==2" src="../assets/imgs/yy_female.png" alt="">
                 </span>
                 <div class="footer">
                     <div style="overflow:hidden">

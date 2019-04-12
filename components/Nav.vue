@@ -2,7 +2,7 @@
     <div class="nav_wrap" id="nav" ref="nav">
         <div class="container nav">
             <div class="logo_img_wrap fl">
-                <img src="/static/imgs/logo.png" alt="">
+                <img src="../assets/imgs/logo.png" alt="">
             </div>
             <div class="search_wrap fl">
                 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAATCAMAAABFjsb+AAAAe1BMVEUAAADMzMzKysrMzMzMzMzMzMzMzMzLy8vMzMzMzMzNzc3Hx8fHx8fDw8PLy8vMzMzMzMzLy8vLy8vMzMzNzc3KysrLy8vNzc3MzMzLy8vMzMzMzMzLy8vLy8vAwMDNzc3MzMzLy8vLy8vLy8vLy8vKysrMzMzKysrKyspil4h9AAAAKXRSTlMA0B3gyLHqb2liRhQQDAjw3JhTTj8zJOW1q5aPLikEwL+7o56FfXNXOn27g6sAAACfSURBVBjTZY9XEoQgEAUHyWYFs25O9z/hglAu1L6PZmigZoA9pZZCFRAkXxi5z7QLVIebxFX05VXPWvBJEHcFEZZestUuikAQPllOMmpX2e51D2HIx6DKI0eVAU4id9EGYxuqssoMJQ3d+7yf4PSnitpt9LAeL8fGVy0TJ/dxdMuoH227Dg0XD4IlFOiYY+PL/Ezt7RzVVsbJEIJ/mX4BkaQGfu0MZW8AAAAASUVORK5CYII="
@@ -10,32 +10,32 @@
                 <input placeholder="昵称" type="text" v-model="content" @input="search">
             </div>
             <ul class="nav_links fl">
-                <router-link exact :to="{name: 'home'}">
+                <nuxt-link exact :to="{name: 'index'}">
                     <li class="nav_item center">
                         <span>
                             首页
                         </span>
                     </li>
-                </router-link>
-                <router-link exact :to="{name: 'findPeople',params:{key: defaultkey}}">
+                </nuxt-link>
+                <nuxt-link exact :to="{path:'/findPeople',query: {key:'wzry'}}">
                     <li class="nav_item center">
                         <span>
                             找陪玩
                         </span>
                     </li>
-                </router-link>
-                <router-link :to="{name: item.link}" v-for="(item, index) in navList" :key="index">
+                </nuxt-link>
+                <nuxt-link :to="{path: item.path}" v-for="(item, index) in navList" :key="index">
                     <li class="nav_item center">
                         <span>
                             {{item.name}}
                         </span>
                     </li>
-                </router-link>
-                <router-link v-if="!hasToken" exact to="{name: ''}">
+                </nuxt-link>
+                <nuxt-link v-if="!hasToken" exact to="">
                     <li class="nav_item center" @click="showLogin">
                         <span>登录 | 注册</span>
                     </li>
-                </router-link>
+                </nuxt-link>
             </ul>
             <!-- 用户信息 -->
             <div class="photo_wrap fr" v-if="hasToken" @mouseover="show=true" @mouseout="show=false">
@@ -58,48 +58,48 @@
                 <p>id: <span>{{userInfo.openid}} </span></p>
                 <div v-if="userInfo.stype==0">
                     <ul class="links">
-                        <router-link :to="{name:'order'}" tag="li" class="item">
+                        <nuxt-link :to="{name:'order'}" tag="li" class="item">
                             <img
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAMAAACelLz8AAAAV1BMVEUAAACWlpb/Siz/Sy2ZmZmZmZmXl5eZmZmZmZmZmZmZmZmYmJiWlpaUlJSSkpKZmZn/ORySkpKZmZn/Sy6ZmZn/TC2YmJiXl5eZmZmVlZX/SSSZmZn/TC5se17xAAAAG3RSTlMAQxEi7sgTuKOTkH4lIBgKCQfl09G8sIBwKRVAF2unAAAAdklEQVQoz7XQWQqAMAxF0Rdt6zzP1v2vUxQbRVsEwfsXDoQQANoW9jSe/UUCQEqm6krbEGgTMTl6p/Hz8aXHlTfqFq65kedz8x8/zIWTSB7EP+wNxclJE22lhyiRuRaGMRyUyMJOKmxzWEhRJKICTJdqOWR4bwW3CwvNvfNMTAAAAABJRU5ErkJggg==">
                             <p>订单中心</p>
-                        </router-link>
-                        <router-link :to="{name:'join'}" tag="li" class="item">
+                        </nuxt-link>
+                        <nuxt-link :to="{name:'join'}" tag="li" class="item">
                             <img
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAMAAACelLz8AAAAllBMVEUAAAD/LhqZmZmQkJCZmZmZmZmYmJiXl5eYmJiZmZmZmZn/TC6ZmZmZmZmZmZmZmZmXl5eZmZmXl5eZmZn/Sy3/SyyYmJiYmJj/Sy3/TC3/Syz/SCz/SCv/TC2YmJj/Si2Xl5f/TC3/Sy6ZmZn/Sy3/Sy7/Sy6YmJj/Syv/SiyYmJj/SiuYmJj/SCiYmJiZmZn/RCKZmZm5l+S6AAAAMXRSTlMABVUQq26tJ+ulWv768NrPUkofsK5V5Liqo3AnEeucWkLz5OPaz7i3UkpDQSUgd0EPssq46AAAAQJJREFUKM+dktl6gjAQRk8SCKjsiyKodV+qtuX9X64IxlYuvPDcne9PvslMBi7ar+vaCyU3ZOg15usL4Li2AsQysAE7WApA2a4D2qYjcRXKTe72pcFX3JnExBMjyocaw2DIcPCw+t3IE0asiMgyIjwIP42MHZyxObgMQQZJlyxSIF10WRJIwHYPlmXpTaoaUelGN3Zwu25VLKWMHDqcqLFY8Zr+reqY5/lpBm2tya3WuK31k62zoij285L/L9RANhWtXbd5r69qbfo673rTOBZGxKg3w4/pw96Mer982huZrXq7MZtf71Zmfxv13W5UuT2L251yXtFkT3uY70YNq6ziFb/OpxJR4aMR0gAAAABJRU5ErkJggg==">
                             <p>成为陪玩</p>
-                        </router-link>
-                        <router-link :to="{name:'purse'}" tag="li" class="item">
+                        </nuxt-link>
+                        <nuxt-link :to="{name:'purse'}" tag="li" class="item">
                             <img
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAMAAACelLz8AAAAb1BMVEUAAACWlpaZmZmZmZmYmJiTk5OSkpKZmZmZmZmZmZmZmZmYmJiZmZmUlJSWlpaVlZWZmZmZmZmZmZmZmZmZmZmZmZn/TC6ZmZn/SiyZmZmYmJiXl5eYmJj/Siv/SS7/SymUlJT/Qyj/QCCZmZn/TC7IpPFRAAAAI3RSTlMAM+XMoRAGqlWL4cJvICIY73prOC3UrJGQhH5iXEg4LCgTCO0GJRwAAACeSURBVCjPfdLZDsIgEIXhw7Booaut+y6+/zOKKYmGDvy3X0LIzCAkFPn/SAnMVVQ3Br9MU1M1i9NI0+5rgoIsjQSgNuCqFWAblloCvGHJ+EDgW5CZRCylU7+VsYSOrss8qPsO9xdLo8TtfWDpYfHcXVmCPGc/P1l1WccSgh7UKlaaRnGGts1Mvriv0Wa3jL0z/G2Ehg4Ac1Exmd5huQ8IIwv9A+OOZgAAAABJRU5ErkJggg==">
                             <p>我的钱包</p>
-                        </router-link>
+                        </nuxt-link>
                     </ul>
                 </div>
                 <div v-if="userInfo.stype==1" :class="{'online': userInfo.online_status == 1}">
                     <div class="taking" v-if="userInfo.online_status == 0" @click="onOfflineReceipt(0)">开始接单</div>
                     <div class="taking" v-if="userInfo.online_status == 1" @click="onOfflineReceipt(1)">结束接单</div>
                     <ul class="links">
-                        <router-link :to="{path:'/userCenter/order'}" tag="li" class="item">
+                        <nuxt-link :to="{path:'/userCenter/order'}" tag="li" class="item">
                             <img
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAMAAACelLz8AAAAS1BMVEUAAAD/Sy3/Siz/SCv/RSf/Sy3/TC3/Mxr/RiL/Sy3/Sy3/Sy3/TC3/Sy3/Sy3/Syv/TC7/TC3/Sy3/TC7/Sy7/Syz/SC7/AAD/TC4QTrdEAAAAGHRSTlMARCIRF5HqCgfx0sq4o35Aw7ywgHApJwJM8INEAAAAdklEQVQoz7XQWQqAMAxF0dfZeR66/5WKYqNog1Dw/oUDIQSAj4Ujj3d/UQ5AirM2u9M+VD4kiJi+aUo+PlOUe1DvqeJBSlI6+VErTzpnqS1Poh8OgUxz0Sz2lrDPSm5hbcBQU7o4qbrQiJAWxhoHolu2GyW+2wCxtAppCX0LHgAAAABJRU5ErkJggg==">
                             <p>订单中心</p>
-                        </router-link>
-                        <router-link :to="{path:'/userCenter/service'}" tag="li" class="item">
+                        </nuxt-link>
+                        <nuxt-link :to="{path:'/userCenter/service'}" tag="li" class="item">
                             <img
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAMAAACelLz8AAAAV1BMVEUAAAD/Si3/Sy3/Sy3/SCz/SCv/LR7/TC3/TC3/Siz/Sy3/Sy3/Sy3/Sy3/Sy7/Syv/SSv/SCj/Sy7/Syz/Sy7/RiL/Sy7/Sy7/SS3/Sy3/TC3/Sin/TC42p8mtAAAAHHRSTlMAV66rJxEF7KVu+vLk2s9SQiC4S5wOt3BJd3Yf4PMx3wAAAMJJREFUKM+cj0sOwyAMBZ8NDgXCLySRKnH/c9YVYV2ps3kajTcGLMcxRsiEL5SDWmQLLc6LzlaT1/GpbjrinTb2mDQnENceezMQBQ9HRz+WSAQGFi8CvbAY/6awLTEFxSzZApDrkt3C7uuwZoBSm+VkAHzO1hIB8O42xvDOl8qlq3a7+a10IioWE1vUuuAX8pkEhi4JiC5OdiEMu4SAduFxIR5/4QkNqoc8vlhGpA1plLQhxYScosSBlDhSisKdDvEBAELbCtI1jSJ8AAAAAElFTkSuQmCC">
                             <p>服务管理</p>
-                        </router-link>
-                        <router-link :to="{path:'/userCenter/purse'}" tag="li" class="item">
+                        </nuxt-link>
+                        <nuxt-link :to="{path:'/userCenter/purse'}" tag="li" class="item">
                             <img
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAMAAACelLz8AAAAYFBMVEUAAAD/ORT/Sy3/Sy3/Si3/Sy3/Sy3/SCv/RSf/Sy7/Sy7/Siz/SCn/TC7/TC3/Sy3/SSr/Ryf/TC7/Sy3/Si7/Siz/RCL/TC7/TC7/Syz/Sy3/Syz/Siv/Sij/SSj/TC57ene7AAAAH3RSTlMABsuqoTNVNhHki24h5eHCLBjvkXdkD9HDhH5cSCYfDHge8gAAAKNJREFUKM990lkOhCAQRdFXWjYzzvbc7H+XbQyJBsHzyU0IqQIrwSocKW6wIe2MJezIGqe3A91KpGSrAQi1lbQpAbBBjmFAWeRYBwRCDoU1Ie+UqGuiNL2GexUl6dn2hQuXoUdH2SQqiDBm09dD1p9sQjUXH995ft+iJEFOXEdX07icofsVJ89zcV/CL6UtY3xQ4W+Apj55gTVK0z6HcOBZ4NofEXsLPqT6RhIAAAAASUVORK5CYII=">
                             <p>我的钱包</p>
-                        </router-link>
+                        </nuxt-link>
                     </ul>
                 </div>
                 <div class="footer_link" :class="{'online': userInfo.stype==1 && userInfo.online_status == 1}">
-                    <router-link :to="{path:'/userCenter/order'}" tag="li" class="item">
+                    <nuxt-link :to="{path:'/userCenter/order'}" tag="li" class="item">
                         <span class="fl">个人中心</span>
-                    </router-link>
+                    </nuxt-link>
                     <span @click="out" class="fr">退出登录</span>
                 </div>
             </div>
@@ -108,7 +108,7 @@
 
 </template>
 <script>
-    import utils from '../utils.js';
+    import utils from '../assets/js/utils.js';
     import {
         mapState,
         mapMutations,
@@ -148,7 +148,7 @@
             out() {
                 this.loginOut();
                 this.$router.push({
-                    name: 'home'
+                    name: 'index'
                 })
             },
             onOfflineReceipt(status) { //
@@ -187,7 +187,8 @@
             }, 500)
 
         },
-        mounted() {},
+        mounted() {
+        },
         activated() {}
     }
 

@@ -1,4 +1,5 @@
 import index from './api/home'
+import findPeople from './api/findPeople'
 const Koa = require('koa')
 const consola = require('consola')
 const {
@@ -31,6 +32,7 @@ async function start() {
     }
     //配置路由
     app.use(index.routes()).use(index.allowedMethods())
+    app.use(findPeople.routes()).use(findPeople.allowedMethods())
     app.use(ctx => {
         ctx.status = 200
         ctx.respond = false // Bypass Koa's built-in response handling

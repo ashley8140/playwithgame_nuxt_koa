@@ -13,16 +13,16 @@ const state = {
     searchInfo: [],
     navList: [{
         "name": "充值",
-        "link": "recharge"
+        "path": "/recharge"
     }, {
         "name": "申请入驻",
-        "link": "service"
+        "path": "/userCenter/service"
     }, {
         "name": "APP下载",
-        "link": "appDownload"
+        "path": "/appDownload"
     }, {
         "name": "消息",
-        "link": "message"
+        "path": "/message"
     }],
     level: {
         "0": 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAASCAMAAAAuTX21AAAAz1BMVEUAAAC1tbXGxsakpKSUlJS1tbW0tLSlpaWenp6jo6OioqKioqKioqKioqKhoaGqqqqoqKiqqqq0tLSioqK1tbWioqK0tLS0tLS0tLS0tLSioqLFxcWhoaG/v7+goKCioqK1tbWenp6zs7Otra21tbXS0tLc3Nzl5eW6urrZ2dmpqanNzc329vbs7Oz6+vrPz8/W1tazs7P5+fnDw8PAwMDe3t7JycnHx8ewsLD////o6OjLy8umpqbx8fHGxsaqqqq8vLytra319fXR0dG3t7cw38wSAAAAJHRSTlMAYJz9CKmXRCPw2dOqgWNTPBP29Onp6OXXxcWWk4R2cG4yKBl3p14iAAABe0lEQVQoz5WS6W7CMAyAs3UMdt/3vdmQNCVpt15Qbnj/Z5rdUBX4w/YpsmXJn1zLFUTrwF/hoCW2snc0ajOdTpmyo72tyrHUio1ulx2lJxGu8QMV141mabzlWmNplA5qnU+oMURGIWrqlfRiydY+fcK5X2itFRnOoaLwM+x8I/PdxxggGUIaBEaVjhCH8ofAzhLkSvqV0p3xkEDBUEFsUnbORdOLKC/aS3h65I0qpd0rAFIj6dGwPisNIc4G7FhnWDYGMVYKzlTZGgYALsAt7f/KTuyUmI0J1kp7CNJYSGoFBPHsc80GL+gD1koqzcgauTrl0l1mDJCVZwQY5/NamUvoJv0EwAZQ7fLg7v84hYVbfjq16BRFpNxsKMoghNiErLyLkovDHCwvn/sandJjAmo2QyBSE5gEiPvqd2rd5DEtnw8KXKKIQgI5FDjZEae7T1HxcRWFKvIyXMHCJlHjS9Q0vSzz9p92V3jZ2eDsQqxxOh6fin9ycvK3vl+KCWVYnVmaPQAAAABJRU5ErkJggg==',
@@ -125,3 +125,5 @@ const store = () => new Vuex.Store({
     mutations,
     actions
 })
+
+export default store

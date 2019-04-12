@@ -39,7 +39,7 @@
                 </ul>
             </li>
         </ul>
-        <section class="choose">
+        <section class="choose" v-show="gameinfo.length > 0">
             <div class="multiple item point" :class="{'active': orderby == 0}" @click="changeOrderby('mutiple')">
                 综合排序
             </div>
@@ -94,7 +94,7 @@
 <script>
     import GameList from '../components/gameList'
     import pagination from '../components/pagination'
-    import utils from '../utils.js';
+    import utils from '../assets/js/utils.js';;
     import {
         mapState
     } from 'vuex'
@@ -120,6 +120,7 @@
                 tag: { //jnsp: 1
                 },
                 total_page: 1,
+                key: ''
             }
         },
         components: {
@@ -130,7 +131,7 @@
         methods: {
             pagechange: function (currentPage) {
                 this.page = currentPage;
-                this.getHunterDebunce()
+                this.getHunterList()
             },
 
             changeOrderby(type) {
@@ -159,13 +160,13 @@
                     this.orderby = 0;
                 }
                 // 防抖
-                this.getHunterDebunce();
+                this.getHunterList();
             },
             getHunterList(args) {
-                var action;
-                if (args) {
+                var action = args;
+                /* if (args) {
                     action = args[0]
-                }
+                } */
                 //params game=wzry&path=&sex=2&orderby=0&search=&page=1
                 var d = {
                     game: this.key,
@@ -175,12 +176,12 @@
                     page: this.page,
                     path: this.path
                 }
-
-                this.$http.get('/v1/index/lists', {
+                this.$axios.get('/lists', {
                     params: d
                 }).then((data) => {
                     var d = data.data;
                     if (d.code == 200) {
+                        this.key = d.data.key
                         this.gamelist = d.data.game;
                         this.restart_key = this.gamelist[Object.keys(this.gamelist)[0]].key;
                         this.taglist = d.data.tags.lists;
@@ -195,7 +196,7 @@
                         //this.total_page = this.info_pages;
                     } else if (d.code == 100) { //游戏名异常
                         this.$router.push({
-                            name: 'home'
+                            name: 'index'
                         })
                     }
                 })
@@ -203,7 +204,7 @@
             changeGame(title, key) { //游戏名字变了
                 this.title = title;
                 this.key = key;
-                this.getHunterDebunce('changegame')
+                this.getHunterList('changegame')
 
                 /*   this.$router.push({
                       name: 'findPeople',
@@ -233,7 +234,7 @@
                 }
                 this.path = path;
 
-                this.getHunterDebunce()
+                this.getHunterList()
             },
             more(tag, more) {
                 //console.log(tag)
@@ -264,13 +265,13 @@
                                      key: this.restart_key
                                  }
                              }) */
-                this.getHunterDebunce()
+                this.getHunterList()
             }
         },
         created() {
-            this.key = this.$route.params.key;
+            !!this.$route.params.key&&(this.key = this.$route.params.key);
             //是从首页游戏tag或者刷新
-            this.getHunterDebunce = this.getHunterAjax();
+            //this.getHunterDebunce = this.getHunterAjax();
             this.getHunterList();
         },
         mounted() {},

@@ -29,11 +29,11 @@
         </div>
         <div class="f f2 center c_34" v-show="cur==1">
             <div class="fl">
-                <img src="/static/imgs/timg.jpg" alt="">
+                <img src="../assets/imgs/timg.jpg" alt="">
                 <p>ios下载</p>
             </div>
             <div class="fl" style="margin-left: 16px;">
-                <img src="/static/imgs/timg.jpg" alt="">
+                <img src="../assets/imgs/timg.jpg" alt="">
                 <p>android下载</p>
             </div>
         </div>

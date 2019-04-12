@@ -1,10 +1,11 @@
 <template>
   <div>
     <NavBar></NavBar>
-    <nuxt />
+     <!-- 路由视图，相当于router-view -->
+    <nuxt keep-alive />
     <FooterBar></FooterBar>
     <Login :class="{'show': showLoginBox}"></Login>
-    <Float></Float>
+    <!-- <Float></Float> -->
   </div>
 </template>
 <script>

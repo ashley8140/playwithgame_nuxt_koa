@@ -40,15 +40,22 @@ module.exports = {
      ** Global CSS
      */
     css: [
-        '~assets/css/init.scss'
+        '~assets/css/init.scss',
+        {
+            src: "swiper/dist/css/swiper.css"
+        }
     ],
 
     /*
      ** Plugins to load before mounting the App
      */
-    plugins: [
-        '@/plugins/index',
-    ],
+    plugins: [{
+        src: '@/plugins/toast',
+        ssr: false
+    }, {
+        src: '@/plugins/swiper',
+        ssr: false
+    }],
 
     /*
      ** Nuxt.js modules
@@ -64,7 +71,7 @@ module.exports = {
         // See https://github.com/nuxt-community/axios-module#options
         prefix: '/api/',
     },
-  
+
     /*
      ** Build configuration
      */
@@ -73,5 +80,8 @@ module.exports = {
          ** You can extend webpack config here
          */
         extend(config, ctx) {}
+    },
+    router: {
+        linkActiveClass: 'navIsActive'
     }
 }

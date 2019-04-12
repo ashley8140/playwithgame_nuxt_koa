@@ -8,8 +8,8 @@
         <div style="overflow:hidden;">
             <ul>
                 <li class="item" v-for="(i, index) in list" :key="index">
-                    <div class="fl logo" :class="{'show':cur==1}"><img src="/static/imgs/xx@2x.png" alt=""></div>
-                    <div class="fl logo" :class="{'show':cur==2}"><img src="/static/imgs/gg@2x.png" alt=""></div>
+                    <div class="fl logo" :class="{'show':cur==1}"><img src="../assets/imgs/xx@2x.png" alt=""></div>
+                    <div class="fl logo" :class="{'show':cur==2}"><img src="../assets/imgs/gg@2x.png" alt=""></div>
                     <div class="fl" style="margin-left:20px;">
                         <p class="time">{{i.addtime}}</p>
                         <div class="message" v-html="i.msg"></div>

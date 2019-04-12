@@ -5,14 +5,14 @@
             <div class="pop_close" @click="close"></div>
             <div class="download">
                 <div class="fl item ">
-                    <img class="img1" src="/static/imgs/e.png" alt="">
+                    <img class="img1" src="../assets/imgs/e.png" alt="">
                     <div class="code_wrap">
                         <div class="code fl">
-                            <img src="/static/imgs/timg.jpg" alt="">
+                            <img src="../assets/imgs/timg.jpg" alt="">
                             <p>ios下载</p>
                         </div>
                         <div class="code fr">
-                            <img src="/static/imgs/timg.jpg" alt="">
+                            <img src="../assets/imgs/timg.jpg" alt="">
                             <p>Android下载</p>
                         </div>
                     </div>
@@ -181,7 +181,7 @@
             overflow: hidden;
             width: 740px;
             border-radius: 20px;
-            background: url("/static/imgs/c@2x.png") no-repeat left bottom;
+            background: url("../assets/imgs/c@2x.png") no-repeat left bottom;
             background-color: #fff;
             padding: 49px 0 35px 0;
 
