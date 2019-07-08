@@ -81,7 +81,6 @@
                     </div>
                     <p class="tips">（*订单在3分钟内未支付，将自动取消）</p>
                 </div>
-
             </div>
         </div>
     </div>
@@ -145,7 +144,7 @@
                 }
             },
             getOrder() {
-                this.$axios.get('/v1/Order/getOrder', {
+                this.$axios.get('/Order/getOrder', {
                     params: {
                         service_id: this.service_id,
                         uid_service: this.uid_service

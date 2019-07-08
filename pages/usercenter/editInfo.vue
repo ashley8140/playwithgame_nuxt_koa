@@ -141,7 +141,7 @@
                     return;
                 }
                 //上传头像 接口无效
-              /*   this.$axios.post('/v1/user/edit',{
+              /*   this.$axios.post('/user/edit',{
                     avatar: file
                 }).then((data)=> {
                     var d = data.data;
@@ -181,7 +181,7 @@
                 reader.readAsDataURL(file);
             },
             getProfessionalList() {
-                this.$axios.get('/v1/user/professionalList').then((data) => {
+                this.$axios.get('/user/professionalList').then((data) => {
                     var d = data.data;
                     if (d.code == 200) {
                         this.professionalList = d.data;
@@ -200,7 +200,7 @@
             },
             getUserInfo() {
                 return new Promise((resolve, reject) => {
-                    this.$axios.get('/v1/User/userInfo').then((data) => {
+                    this.$axios.get('/User/userInfo').then((data) => {
                         var d = data.data;
                         if (d.code == 200) {
                             this.userInfo = d.data;
@@ -219,7 +219,7 @@
                 })
             },
             getProvinceList() {
-                this.$axios.get('/v1/user/provinceList').then((data) => {
+                this.$axios.get('/user/provinceList').then((data) => {
                     var d = data.data;
                     if (d.code == 200) {
                         this.provinceList = d.data;
@@ -239,7 +239,7 @@
                 })
             },
             getCityList(id) {
-                this.$axios.get('/v1/user/provinceList', {
+                this.$axios.get('/user/provinceList', {
                     params: {
                         parentid: id
                     }
@@ -275,7 +275,7 @@
                     city: this.city,
                 }
                 console.log(this.userInfo.nickname)
-                this.$axios.post('/v1/User/saveUserInfo', d).then((data) => {
+                this.$axios.post('/User/saveUserInfo', d).then((data) => {
                     var d = data.data;
                     if (d.code == 200) {
                         this.$toast.success(d.message)

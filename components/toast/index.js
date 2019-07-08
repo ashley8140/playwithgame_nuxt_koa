@@ -1,3 +1,4 @@
+//自定义组件
 import toast from './toast'
 export default {
     install(Vue) {

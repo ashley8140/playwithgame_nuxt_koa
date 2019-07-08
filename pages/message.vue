@@ -58,7 +58,7 @@
                 } else {
                     d.type = null;
                 }
-                this.$axios.get('/v1/NoticeMessage/lists', {
+                this.$axios.get('/NoticeMessage/lists', {
                     params: d
                 }).then((data) => {
                     var d = data.data;

@@ -5,7 +5,6 @@
                 <span class="bold block" style="font-size:24px;">个人中心</span>
                 <span class="line"></span>
             </div>
-
             <ul class="nav">
                 <nuxt-link :to="{path: i.link}" v-for="(i,index) in hunterUserCenterNav" tag="li" :key=index>
                     {{i.name}}

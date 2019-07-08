@@ -71,7 +71,7 @@
             },
             upDownService(index) { //上架 up_down 1 下架 0
                 var id = this.list[index].service_id;
-                this.$axios.post('/v1/Gamer/upDownService', {
+                this.$axios.post('/Gamer/upDownService', {
                     service_id: id,
                     up_down: status
                 }).then((data) => {
@@ -88,7 +88,7 @@
             },
             getServiceList() { //获取服务列表
                 var that = this;
-                this.$axios.get('/v1/Gamer/pwApply').then((data) => {
+                this.$axios.get('/Gamer/pwApply').then((data) => {
                     var d = data.data;
                     if (d.code == 200) {
                         that.list = d.data;

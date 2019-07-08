@@ -1,7 +1,6 @@
 <template>
     <div>
-        <div id="slide" v-if="slide.length > 0" v-swiper:mySwiper="swiperOption" class="swiper-container"
-            style="width: 100%;min-width: 1200px;">
+        <div id="slide" class="swiper-container" style="width: 100%;min-width: 1200px;">
             <div class="swiper-wrapper">
                 <div class="swiper-slide" v-for="(item, index) in slide" :key=index>
                     <img :src=item.slide_pic>
@@ -22,7 +21,7 @@
                     <ul class="service">
                         <!-- path query -->
                         <nuxt-link v-for="(item, index) in gameList" :key="index"
-                            :to="{name:'findPeople',params:{key: item.key}}" tag="li" class="item point">
+                            :to="{path:'/findPeople',query:{key: item.key}}" tag="li" class="item point">
                             <img class="img" @mouseover="curIndex=index" :class="{'big': curIndex == index}"
                                 :src="item.web_logo1">
                             <p>{{item.title}}</p>
@@ -40,7 +39,7 @@
                         <p class="p1"> <img width=27 :src=item.web_logo2 alt=""> {{item.title}}</p>
                         <ul class="game">
                             <li tag="li" class="item" v-for="(i, index) in item.lists" :key=index>
-                                <nuxt-link :to="{name:'hunterInfo', params:{touid: i.user_id,key:item.key}}"
+                                <nuxt-link :to="{path:'/hunterInfo', query:{touid: i.user_id,key:item.key}}"
                                     class="point">
                                     <img class="pic" :src=i.avatar alt="">
                                 </nuxt-link>
@@ -65,7 +64,7 @@
                                     </div>
                                 </div>
                             </li>
-                            <nuxt-link tag="span" class="more" :to="{name:'findPeople',params:{key: item.key}}">MORE>>
+                            <nuxt-link tag="span" class="more" :to="{path:'findPeople',query:{key: item.key}}">MORE>>
                             </nuxt-link>
                         </ul>
                     </div>
@@ -73,7 +72,7 @@
                 <div class="game_logo">
                     <nuxt-link v-show="item.lists.length > 0" tag="img" class="point" width=27
                         v-for="(item, index) in gameList" :key=index :src=item.web_logo2 alt=""
-                        :to="{name:'findPeople',params:{key: item.key}}"></nuxt-link>
+                        :to="{path:'/findPeople',query:{key: item.key}}"></nuxt-link>
                 </div>
             </div>
         </div>
@@ -85,6 +84,7 @@
         mapMutations
     } from 'vuex';
     import utils from '../assets/js/utils.js';
+    import Swiper from 'swiper';
 
     export default {
         data() {
@@ -95,7 +95,7 @@
                 ],
                 gameList: [],
                 curIndex: 0,
-                swiperOption: {
+/*                 swiperOption: {
                     autoplay: {
                         delay: 2000,
                         disableOnInteraction: false
@@ -113,7 +113,7 @@
                     },
                     observer: true, //修改swiper自己或子元素时，自动初始化swiper
                     observeParents: true //修改swiper的父元素时，自动初始化swiper
-                }
+                } */
             }
         },
         computed: {
@@ -131,7 +131,7 @@
                 audio.play();
             },
             getGameList() {
-                this.$axios.get("index", {
+                this.$axios.get("/index/index", {
                     auth: false
                 }).then((data) => {
                     var d = data.data;
@@ -139,11 +139,27 @@
                         d = d.data
                         this.slide = d.slide
                         this.gameList = d.game;
-/*                         utils.setItem('defaultkey', d.game[0].key)
-                        this.UPDATEDEFAULTKEY(this.gameList[0].key); */
+                        utils.setItem('defaultkey', d.game[0].key)
+                        this.UPDATEDEFAULTKEY(this.gameList[0].key);
+                        this.initSwiper()
                     }
                 })
             },
+            initSwiper() {
+                var mySwiper = new Swiper('#slide', {
+                    autoplay: true,
+                    loop: true,
+                    pagination: {
+                        el: '.swiper-pagination',
+                    },
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    },
+                    observer: true, //修改swiper自己或子元素时，自动初始化swiper
+                    observeParents: true //修改swiper的父元素时，自动初始化swiper
+                })
+            }
         },
         created() {
 

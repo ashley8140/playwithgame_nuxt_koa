@@ -67,7 +67,7 @@
         methods: {
             //stype 1是充值余额，2是购买钻石
             chargeRule() {
-                this.$axios.get('/v1/payment/chargeRule', {
+                this.$axios.get('/payment/chargeRule', {
                     params: {
                         stype: 1,
                         qid: 3

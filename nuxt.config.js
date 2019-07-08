@@ -52,9 +52,6 @@ module.exports = {
     plugins: [{
         src: '@/plugins/toast',
         ssr: false
-    }, {
-        src: '@/plugins/swiper',
-        ssr: false
     }],
 
     /*
@@ -69,7 +66,7 @@ module.exports = {
      */
     axios: {
         // See https://github.com/nuxt-community/axios-module#options
-        prefix: '/api/',
+        prefix: '/v1/',
     },
 
     /*

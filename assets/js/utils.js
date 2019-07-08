@@ -1,4 +1,11 @@
 const utils = {
+    phoneAvailable(value) {
+        const regExp = /^[1][3,4,5,7,8][0-9]{9}$/;
+        if (!regExp.test(value)) {
+            return false
+        }
+        return true
+    },
     getToken() {
         var userInfo = JSON.parse(utils.getItem('userInfo'));
         if (userInfo && userInfo.token){

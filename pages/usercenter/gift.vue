@@ -127,7 +127,7 @@
                 }
             },
             myGiftList() { //礼物列表
-                this.$axios.get('/v1/gift/myGiftList').then((data) => {
+                this.$axios.get('/gift/myGiftList').then((data) => {
                     var d = data.data;
                     if (d.code == 200) {
                         this.list = d.data.lists;
@@ -139,7 +139,7 @@
                 })
             },
             myGiftDetails() { //礼物明细
-                this.$axios.get('/v1/gift/myGiftDetails', {
+                this.$axios.get('/gift/myGiftDetails', {
                     params: {
                         page: this.page,
                         type: this.type
@@ -163,7 +163,7 @@
                     this.$toast.success("您没有礼物可兑换!");
                     return
                 }
-                this.$axios.post('/v1/gift/giftToBalance').then((data) => {
+                this.$axios.post('/gift/giftToBalance').then((data) => {
                     var d = data.data;
                     if (d.code == 200) {
                         this.list = [];

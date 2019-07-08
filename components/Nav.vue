@@ -17,7 +17,7 @@
                         </span>
                     </li>
                 </nuxt-link>
-                <nuxt-link exact :to="{path:'/findPeople',query: {key:'wzry'}}">
+                <nuxt-link exact :to="{path:'/findPeople'}">
                     <li class="nav_item center">
                         <span>
                             找陪玩
@@ -92,7 +92,7 @@
                         <nuxt-link :to="{path:'/userCenter/purse'}" tag="li" class="item">
                             <img
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAMAAACelLz8AAAAYFBMVEUAAAD/ORT/Sy3/Sy3/Si3/Sy3/Sy3/SCv/RSf/Sy7/Sy7/Siz/SCn/TC7/TC3/Sy3/SSr/Ryf/TC7/Sy3/Si7/Siz/RCL/TC7/TC7/Syz/Sy3/Syz/Siv/Sij/SSj/TC57ene7AAAAH3RSTlMABsuqoTNVNhHki24h5eHCLBjvkXdkD9HDhH5cSCYfDHge8gAAAKNJREFUKM990lkOhCAQRdFXWjYzzvbc7H+XbQyJBsHzyU0IqQIrwSocKW6wIe2MJezIGqe3A91KpGSrAQi1lbQpAbBBjmFAWeRYBwRCDoU1Ie+UqGuiNL2GexUl6dn2hQuXoUdH2SQqiDBm09dD1p9sQjUXH995ft+iJEFOXEdX07icofsVJ89zcV/CL6UtY3xQ4W+Apj55gTVK0z6HcOBZ4NofEXsLPqT6RhIAAAAASUVORK5CYII=">
-                            <p>我的钱包</p>
+                            <p>我的钱包</p>   
                         </nuxt-link>
                     </ul>
                 </div>
@@ -153,7 +153,7 @@
             },
             onOfflineReceipt(status) { //
                 var s = status == 0 ? 1 : 0
-                this.$http.put('/v1/user/onOfflineReceipt', {
+                this.$http.put('/user/onOfflineReceipt', {
                     online_status: s
                 }).then((data) => {
                     var d = data.data;
@@ -176,7 +176,7 @@
                 if (args) {
                     var resolve = args[0]
                 }
-                this.$http.get('/v1/index/search', {
+                this.$http.get('/index/search', {
                     params: {
                         keyword: this.content
                     }
@@ -188,8 +188,11 @@
 
         },
         mounted() {
+            console.log('nav mounted');
         },
-        activated() {}
+        activated() {
+            console.log('nav activated');
+        }
     }
 
 </script>

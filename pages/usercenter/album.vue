@@ -38,7 +38,7 @@
         },
         methods: {
             deletePic: function (id, index) {
-                this.$axios.delete('/v1/user/deletePrivatePhotos', { //delete传参不能用params,不然后台接受不到参数
+                this.$axios.delete('/user/deletePrivatePhotos', { //delete传参不能用params,不然后台接受不到参数
                     data: {
                         id: id
                     }
@@ -60,7 +60,7 @@
             },
             getPhotoList() {
 
-                this.$axios.get('/v1/user/myPhotosLists', {
+                this.$axios.get('/user/myPhotosLists', {
                     params: {
                         page: this.page,
                         pagesize: this.pagesize
@@ -88,7 +88,7 @@
                 var formData = new FormData();
                 var files = this.$refs.file.files[0];
                 formData.append('files', files);
-                this.$axios.post('/v1/user/upMyPhotos', formData, config).then((data) => {
+                this.$axios.post('/user/upMyPhotos', formData, config).then((data) => {
                     var d = data.data;
                     if (d.code == 200) {
                         this.$toast.success("上传成功!");

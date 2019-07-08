@@ -256,7 +256,7 @@
                 d.path = path //不用this
                 d.pic = this.pic
 
-                this.$axios.post('/v1/Gamer/addApply', d).then((data) => {
+                this.$axios.post('/Gamer/addApply', d).then((data) => {
                     var d = data.data;
                     if (d.code == 200) {
                         this.$toast.success(d.message);
@@ -268,7 +268,7 @@
                 })
             },
             applyGame() { //获取服务详情 key 入驻
-                this.$axios.get('/v1/Gamer/applyGame', {
+                this.$axios.get('/Gamer/applyGame', {
                     params: {
                         game: this.key
                     }
@@ -294,7 +294,7 @@
                 })
             },
             editApply() { //获取已经填写的信息 service_id 修改
-                this.$axios.get('/v1/Gamer/editApply', {
+                this.$axios.get('/Gamer/editApply', {
                     params: {
                         game: this.key,
                         service_id: this.service_id

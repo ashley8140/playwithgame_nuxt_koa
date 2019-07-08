@@ -106,7 +106,7 @@
 
             },
             myBalanceLists() {
-                this.$axios.get('/v1/payment/myBalanceLists', {
+                this.$axios.get('/payment/myBalanceLists', {
                     params: {
                         page: this.page,
                         type: this.type
@@ -127,7 +127,7 @@
                 })
             },
             myDiamondLists() {
-                this.$axios.get('/v1/payment/myDiamondLists', {
+                this.$axios.get('/payment/myDiamondLists', {
                     params: {
                         page: this.page,
                         type: this.type
@@ -149,8 +149,10 @@
             }
         },
         mounted() {
-            console.log("我的钱包")
             this.myBalanceLists();
+        },
+        activated () {
+            console.log('purse activated')
         }
     }
 

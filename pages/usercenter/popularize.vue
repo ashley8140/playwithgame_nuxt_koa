@@ -70,7 +70,7 @@
                 }
             },
             promotion() {
-                this.$axios.get('/v1/user/promotion').then((data) => {
+                this.$axios.get('/user/promotion').then((data) => {
                     var d = data.data;
                     if (d.code == 200) {
                         this.discount_open = d.data.discount_open;
@@ -93,7 +93,7 @@
                     discount: this.discount,
                     discount_uptime: Math.round(new Date().getTime() / 1000)
                 }
-                this.$axios.put('/v1/user/promotionSave', d).then((data) => {
+                this.$axios.put('/user/promotionSave', d).then((data) => {
                     var d = data.data;
                     if (d.code == 200) {
                         this.$toast.success("提交成功");

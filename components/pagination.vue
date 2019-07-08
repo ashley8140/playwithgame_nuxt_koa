@@ -13,8 +13,8 @@
         <span :class="{'disabled': current == total,'active': current == total}" @click="setCurrent(total)">
             尾页
         </span>
-        <span class="next" :class="{'disabled':current==total,'active': current == total}" @click="setCurrent(current+1)"><img
-                :src=base64.next alt=""></span>
+        <span class="next" :class="{'disabled':current==total,'active': current == total}"
+            @click="setCurrent(current+1)"><img :src=base64.next alt=""></span>
     </div>
 </template>
 
@@ -47,6 +47,11 @@
                 }
             }
         },
+      /*   watch: {
+            currentPage(newV, oldV) {
+                console.log("watch")
+            }
+        }, */
         computed: {
             ...mapState(['base64']),
             grouplist: function () {

@@ -199,7 +199,7 @@
                 this.contactBox = true;
             },
             receive(id,index){
-                this.$axios.post('/v1/Order/receive', {
+                this.$axios.post('/Order/receive', {
                     oid: id
                 }).then((data) => {
                     var d = data.data;
@@ -210,7 +210,7 @@
                 })
             },
             finish(id, index) {
-                this.$axios.post('/v1/Order/finish', {
+                this.$axios.post('/Order/finish', {
                     oid: id
                 }).then((data) => {
                     var d = data.data;
@@ -236,7 +236,7 @@
                 this.index = index;
             },
             cancel() {
-                this.$axios.post('/v1/order/cancel', {
+                this.$axios.post('/order/cancel', {
                     order_id: this.id
                 }).then((data) => {
                     var d = data.data;
@@ -251,7 +251,7 @@
                 })
             },
             comment() {
-                this.$axios.post('/v1/Order/comment', {
+                this.$axios.post('/Order/comment', {
                     oid: this.oid,
                     service_id: this.service_id,
                     star: this.score,
@@ -328,7 +328,7 @@
                 this.contactBox = false;
             },
             myOrder() {
-                this.$axios.get('/v1/Order/lists', {
+                this.$axios.get('/Order/lists', {
                     params: {
                         page: this.page,
                         type: this.type
@@ -346,8 +346,9 @@
                     }
                 })
             },
+            
             myPlayOrder() {
-                this.$axios.get('/v1/Order/pwlists', {
+                this.$axios.get('/Order/pwlists', {
                     params: {
                         page: this.page,
                         type: this.type

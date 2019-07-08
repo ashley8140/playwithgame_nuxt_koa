@@ -13,8 +13,6 @@
                 根据猎人的接单数量，一单获取2分，分为以下20个级别：
             </p>
         </div>
-
-
         <img src="../assets/imgs/gz@2x.png" style="display: block;margin: 20px auto 110px" alt="">
     </div>
 </template>
