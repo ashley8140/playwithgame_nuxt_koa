@@ -164,6 +164,7 @@ export default {
                 return;
             }
             var d = "mobile=" + this.mobile.trim() + "&yzm=" + yzm;
+
             this.$axios.post("/Auth/phoneLogin", d, {}).then(data => {
                 /*      
                         d.stype, //1猎人，0普通用户，2待审核
@@ -176,9 +177,10 @@ export default {
                     utils.setItem("userInfo", obj);
                     // this.UPDATEACCESSTOKEN({
                     //     access_token: d.data.token.access_token,
-                    //     user_id: d.data.user_id
+                    //     user_id: d.data.userInfo.user_id
                     // });
-                    // this.UPDATETOKEN(true);
+                    this.UPDATEACCESSTOKEN(d.data.token.access_token);
+                    this.UPDATETOKEN(true);
                     this.UPDATEUSERINFOR(d.data);
                 } else {
                     this.$toast.error(d.message);

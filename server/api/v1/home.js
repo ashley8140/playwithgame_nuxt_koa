@@ -7,7 +7,7 @@ let router = new Router({
 //首页数据
 router.get('/index', (ctx, next) => {
     ctx.body = {
-        code: 200,
+        code: 0,
         message: 'success',
         data: {
             slide: [

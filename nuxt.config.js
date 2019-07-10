@@ -1,6 +1,4 @@
-const pkg = require('./package')
-
-
+const pkg = require('./package');
 module.exports = {
     mode: 'universal',
 
@@ -9,7 +7,8 @@ module.exports = {
      */
     head: {
         title: pkg.name,
-        meta: [{
+        meta: [
+            {
                 charset: 'utf-8'
             },
             {
@@ -22,11 +21,13 @@ module.exports = {
                 content: pkg.description
             }
         ],
-        link: [{
-            rel: 'icon',
-            type: 'image/x-icon',
-            href: '/favicon.ico'
-        }]
+        link: [
+            {
+                rel: 'icon',
+                type: 'image/x-icon',
+                href: '/favicon.ico'
+            }
+        ]
     },
 
     /*
@@ -42,24 +43,30 @@ module.exports = {
     css: [
         '~assets/css/init.scss',
         {
-            src: "swiper/dist/css/swiper.css"
+            src: 'swiper/dist/css/swiper.css'
         }
     ],
 
     /*
      ** Plugins to load before mounting the App
      */
-    plugins: [{
-        src: '@/plugins/toast',
-        ssr: false
-    }],
+    plugins: [
+        {
+            src: '@/plugins/toast',
+            ssr: false
+        },
+        {
+            src: '@/plugins/axios',
+            ssr: false
+        }
+    ],
 
     /*
      ** Nuxt.js modules
      */
     modules: [
         // Doc: https://axios.nuxtjs.org/usage
-        '@nuxtjs/axios',
+        '@nuxtjs/axios'
     ],
     /*
      ** Axios module configuration
@@ -67,6 +74,8 @@ module.exports = {
     axios: {
         // See https://github.com/nuxt-community/axios-module#options
         prefix: '/v1/',
+        proxy: true,
+        credentials: true //跨域请求时是否需要凭证
     },
 
     /*
@@ -81,4 +90,4 @@ module.exports = {
     router: {
         linkActiveClass: 'navIsActive'
     }
-}
+};

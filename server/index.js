@@ -1,12 +1,16 @@
 import mongoose from 'mongoose';
+import color from 'colors';
 import dbConfig from './config';
-import session from 'koa-session';
-import redis from 'koa-redis';
+//import session from 'koa-session';
+//import redis from 'koa-redis';
+
 import bodyParser from 'koa-bodyparser';
 import json from 'koa-json';
 import passport from './middleware/passport';
+import jwt from 'jsonwebtoken';
 import { accessLogger, logger } from './common/logger';
-//import requestLog from './middleware/request_log';
+import requestLog from './middleware/request_log';
+require('./middleware/mongoose_log');
 
 import * as auth from './middleware/auth';
 
@@ -16,7 +20,6 @@ import Auth from './api/v1/Auth';
 const Koa = require('koa');
 const consola = require('consola');
 const { Nuxt, Builder } = require('nuxt');
-
 const app = new Koa();
 
 // Import and Set Nuxt.js options
@@ -37,26 +40,27 @@ app.use(async (ctx, next) => {
         };
     }
 });
-
+app.use(requestLog);
 //登录成功之后可以把用户信息存入session中。koa-session2会将sessionId写入cookie，
 //再把session对象写入redis,键值为sessionID，这样每次客户端的请求带上sessionID我们就可以从redis中取登录用户信息。
 //也可以通过是否有sessionID来做会话拦截。
 //退出的时候只要将ctx.session置为{}就可以了。
-app.use(
-    session(
-        {
-            key: 'koa:sess', // 默认
-            maxAge: 86400000, //  cookie的过期时间 默认为一天
-            overwrite: true, //
-            httpOnly: true,
-            signed: true,
-            rolling: true, //** 在每次请求时强行设置 cookie，这将重置 cookie 过期时间（默认：false
-            renew: false, //** (boolean) renew session when session is nearly expired
-            store: new redis()
-        },
-        app
-    )
-); //当我们没有写store的时候，默认即利用cookie实现session。
+// app.use(
+//     session(
+//         {
+//             key: 'koa:sess', // 默认
+//             maxAge: 86400000, //  cookie的过期时间 默认为一天
+//             overwrite: true, //
+//             httpOnly: true,
+//             signed: true,
+//             rolling: true, //** 在每次请求时强行设置 cookie，这将重置 cookie 过期时间（默认：false
+//             renew: false, //** (boolean) renew session when session is nearly expired
+//             store: new redis()
+//         },
+//         app
+//     )
+// );
+//当我们没有写store的时候，默认即利用cookie实现session。
 app.use(bodyParser());
 app.use(json()); //自动将我们返回的数据转换为json格式。
 

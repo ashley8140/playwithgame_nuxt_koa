@@ -9,28 +9,25 @@
     </div>
 </template>
 <script>
-    import {
-        mapState
-    } from 'vuex'
-    const NavBar = r => require.ensure([], () => r(require("../components/Nav")));
-    const FooterBar = r => require.ensure([], () => r(require("../components/Footer")));
-    const Login = r => require.ensure([], () => r(require("../components/login")));
-    const Float = r => require.ensure([], () => r(require("../components/Float")))
+import { mapState } from "vuex";
+const NavBar = r => require.ensure([], () => r(require("../components/Nav")));
+const FooterBar = r =>
+    require.ensure([], () => r(require("../components/Footer")));
+const Login = r => require.ensure([], () => r(require("../components/login")));
+const Float = r => require.ensure([], () => r(require("../components/Float")));
 
-    export default {
-        components: {
-            NavBar,
-            FooterBar,
-            Login,
-            Float
-        },
-        computed: {
-            ...mapState(['showLoginBox'])
-        },
-        mounted() {}
-    }
-
+export default {
+    components: {
+        NavBar,
+        FooterBar,
+        Login,
+        Float
+    },
+    computed: {
+        ...mapState(["showLoginBox"])
+    },
+    mounted() {}
+};
 </script>
 <style lang="scss" scoped>
-
 </style>
