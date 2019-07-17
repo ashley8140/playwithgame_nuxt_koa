@@ -1,7 +1,7 @@
 {
     "name": "playwithgame_nuxt_koa",
     "version": "1.0.0",
-    "description": "My first-rate Nuxt.js project",
+    "description": "快游互动陪玩平台为您提供全网最全面的妹子陪玩服务，这里有绝地求生吃鸡,英雄联盟LOL,王者荣耀,刺激战场,魔兽世界,APEX英雄等热门游戏陪玩服务，更有美女小姐姐陪玩24小时接单,找代练,代打平台，就上快游互动陪玩！",
     "author": "ashley8140",
     "private": true,
     "config": {
@@ -19,6 +19,7 @@
     },
     "dependencies": {
         "@nuxtjs/axios": "^5.3.6",
+        "basic-auth": "^2.0.1",
         "colors": "^1.3.3",
         "eventproxy": "^1.0.0",
         "jsonwebtoken": "^8.5.1",
@@ -32,6 +33,7 @@
         "mongoose-timestamp": "^0.6.0",
         "nuxt": "^2.4.0",
         "passport-local": "^1.0.0",
+        "require-directory": "^2.1.1",
         "sass-loader": "^7.1.0",
         "swiper": "^4.5.0",
         "vue-awesome-swiper": "^3.1.3",

@@ -6,7 +6,7 @@ module.exports = {
      ** Headers of the page
      */
     head: {
-        title: pkg.name,
+        title: '约玩_游戏陪玩_妹子陪玩_大神陪玩_导师陪玩',
         meta: [
             {
                 charset: 'utf-8'
@@ -57,8 +57,9 @@ module.exports = {
         },
         {
             src: '@/plugins/axios',
-            ssr: false
-        }
+            ssr: true
+        },
+        { src: '@/plugins/route', ssr: false }
     ],
 
     /*
@@ -74,6 +75,7 @@ module.exports = {
     axios: {
         // See https://github.com/nuxt-community/axios-module#options
         prefix: '/v1/',
+        retry: { retries: 3 },
         proxy: true,
         credentials: true //跨域请求时是否需要凭证
     },
@@ -89,5 +91,7 @@ module.exports = {
     },
     router: {
         linkActiveClass: 'navIsActive'
+        //extendRoutes: routes
+        //middleware: ['authorities']
     }
 };

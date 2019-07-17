@@ -2,7 +2,7 @@ import UserModel from '../models/user';
 import passport from 'koa-passport';
 import LocalStrategy from 'passport-local';
 import * as userProxy from '../proxy/user';
-import { logger } from '../common/logger';
+//import { logger } from '../common/logger';
 
 // 序列化，存储session，用于自动登录,ctx.login()触发
 passport.serializeUser((user, done) => {

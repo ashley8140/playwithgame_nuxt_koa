@@ -132,7 +132,7 @@ export default {
                 .post("/Auth/sendPhoneCode", d)
                 .then(data => {
                     var d = data.data;
-                    if (d.code == 200) {
+                    if (d.code == 0) {
                         this.$toast.success(d.message);
                     } else if (d.code == 401) {
                         //重新登录
@@ -164,7 +164,6 @@ export default {
                 return;
             }
             var d = "mobile=" + this.mobile.trim() + "&yzm=" + yzm;
-
             this.$axios.post("/Auth/phoneLogin", d, {}).then(data => {
                 /*      
                         d.stype, //1猎人，0普通用户，2待审核

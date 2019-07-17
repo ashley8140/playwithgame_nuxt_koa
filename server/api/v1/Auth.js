@@ -1,58 +1,57 @@
 import Router from 'koa-router';
-import passport from '../../middleware/passport';
-import UserModel from '../../models/user';
 import * as userProxy from '../../proxy/user';
-import jwt from 'jsonwebtoken';
-import config from '../../config';
-import EventProxy from 'eventproxy';
-import { logger } from '../../common/logger';
+import { generateToken } from '../../common/utils';
 
-let router = new Router({
+const router = new Router({
     prefix: '/v1/Auth'
 });
 router.post('/sendPhoneCode', async (ctx, next) => {
     // 模拟发送短信验证码
     let promise = new Promise((resolve, reject) => {
-        setTimeout(() => resolve('done'), 1000);
+        setTimeout(() => resolve(), 1000);
     });
     let re = await promise;
     ctx.body = {
-        code: 200,
+        code: 0,
         message: '暂未接入短信平台,请填写123456'
     };
 });
 router.post('/phoneLogin', async (ctx, next) => {
     const mobile = ctx.request.body.mobile;
+    const yzm = Number(ctx.request.body.yzm);
     let err, userInfo;
+    if (yzm !== 123456) {
+        err = new ERRORS.ParameterException('验证码错误', 10001, 400);
+        throw err;
+    }
     [err, userInfo] = await userProxy.getUserByMobile(mobile);
     if (err) {
-        logger.error(err);
-        ctx.body = { code: -1, message: '登录失败' };
+        err = new ERRORS.HttpException('数据库操作出现错误', 10005, 400);
+        throw err;
     }
     if (!userInfo) {
         let user_id;
         [err, user_id] = await userProxy.getUserNum();
         if (err) {
-            logger.error(err);
-            ctx.body = { code: -1, message: '登录失败' };
+            err = new ERRORS.HttpException('数据库操作出现错误', 10005, 400);
+            throw err;
         }
-        //console.log('user_id=>', user_id);
         [err, userInfo] = await userProxy.createNewUser({
             user_id: user_id + 1,
             mobile: mobile
         });
         if (err) {
-            logger.error(err);
-            ctx.body = { code: -1, message: '登录失败' };
+            err = new ERRORS.HttpException('数据库操作出现错误', 10005, 400);
+            throw err;
         }
-        //console.log('_id=>', userInfo._id);
-        let token = jwt.sign({ data: userInfo._id }, config.secret, {
-            expiresIn: '24h'
-        });
+        //生成token
+        const token = generateToken(userInfo._id);
+        console.log('output: token', token);
+
         [err, userInfo] = await userProxy.saveToken(userInfo._id, token);
         if (err) {
-            logger.error(err);
-            ctx.body = { code: -1, message: '登录失败' };
+            err = new ERRORS.HttpException('数据库操作出现错误', 10005, 400);
+            throw err;
         }
     }
     ctx.body = {

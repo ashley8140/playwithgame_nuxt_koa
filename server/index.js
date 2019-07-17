@@ -1,22 +1,11 @@
-import mongoose from 'mongoose';
-import color from 'colors';
-import dbConfig from './config';
-//import session from 'koa-session';
-//import redis from 'koa-redis';
-
+require('colors');
 import bodyParser from 'koa-bodyparser';
 import json from 'koa-json';
 import passport from './middleware/passport';
-import jwt from 'jsonwebtoken';
-import { accessLogger, logger } from './common/logger';
 import requestLog from './middleware/request_log';
+import catchError from './middleware/exceptions';
+import InitManager from './common/init';
 require('./middleware/mongoose_log');
-
-import * as auth from './middleware/auth';
-
-import home from './api/v1/home';
-import Auth from './api/v1/Auth';
-
 const Koa = require('koa');
 const consola = require('consola');
 const { Nuxt, Builder } = require('nuxt');
@@ -28,18 +17,8 @@ config.dev = !(app.env === 'production');
 
 app.keys = ['playwithgame'];
 app.proxy = true; //当 app.proxy 设置为 true 时，支持 X-Forwarded-Host
-//app.use(requestLog);
-app.use(async (ctx, next) => {
-    try {
-        await next();
-    } catch (err) {
-        logger.error(err);
-        ctx.body = {
-            code: 500,
-            message: err.message
-        };
-    }
-});
+
+app.use(catchError);
 app.use(requestLog);
 //登录成功之后可以把用户信息存入session中。koa-session2会将sessionId写入cookie，
 //再把session对象写入redis,键值为sessionID，这样每次客户端的请求带上sessionID我们就可以从redis中取登录用户信息。
@@ -64,20 +43,6 @@ app.use(requestLog);
 app.use(bodyParser());
 app.use(json()); //自动将我们返回的数据转换为json格式。
 
-//连接mongodb
-mongoose
-    .connect(dbConfig.dbs, {
-        poolSize: 20,
-        useCreateIndex: true,
-        useNewUrlParser: true //useNewUrlParser这个属性会在url里识别验证用户所需的db，未升级前是不需要指定的，升级到一定要指定，不管是在url后面，还是用authSource
-    })
-    .then(
-        () => {},
-        err => {
-            logger.error('connect to %s error: ', dbConfig.db, err.message);
-            process.exit(1);
-        }
-    );
 // passport 配置
 app.use(passport.initialize()); //initialzie()函数的作用是只是简单为当前context添加passport字段，便于后面的使用。而
 app.use(passport.session()); //passport.session()则是passport自带的策略，用于从session中提取用户信息
@@ -101,8 +66,7 @@ async function start() {
         await nuxt.ready();
     }
     //配置路由
-    app.use(home.routes()).use(home.allowedMethods());
-    app.use(Auth.routes()).use(Auth.allowedMethods());
+    InitManager.initCore(app);
     app.use(ctx => {
         ctx.status = 200;
         ctx.respond = false; // Bypass Koa's built-in response handling

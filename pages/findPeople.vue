@@ -200,18 +200,19 @@ export default {
                 page: this.page,
                 path: this.path
             };
+
             this.$axios
                 .get("/index/lists", {
                     params: d
                 })
                 .then(data => {
                     var d = data.data;
-                    if (d.code == 200) {
-                        this.key = d.data.key;
+                    if (d.code == 0) {
                         this.gamelist = d.data.game;
                         this.restart_key = this.gamelist[
                             Object.keys(this.gamelist)[0]
                         ].key;
+                        !this.key && (this.key = this.restart_key);
                         this.taglist = d.data.tags.lists;
                         this.gameinfo = d.data.info;
                         this.title = d.data.tags.title;

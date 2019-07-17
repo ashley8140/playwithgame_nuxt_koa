@@ -1,19 +1,5 @@
 import Router from 'koa-router';
-import game from '../mockdata/findPeople/game';
-import wzry from '../mockdata/findPeople/wzry';
-import yxlm from '../mockdata/findPeople/yxlm';
-import cjzc from '../mockdata/findPeople/cjzc';
-import hyxd from '../mockdata/findPeople/hyxd';
-import jdqs from '../mockdata/findPeople/jdqs';
-import qjcj from '../mockdata/findPeople/qjcj';
-let gameInfo = {
-    wzry: wzry,
-    yxlm: yxlm,
-    cjzc: cjzc,
-    hyxd: hyxd,
-    jdqs: jdqs,
-    qjcj: qjcj
-};
+
 let router = new Router({
     prefix: '/api/'
 });

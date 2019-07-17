@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const timestamp = require('mongoose-timestamp');
-import config from '../config';
+import myConfig from '../config/myConfig';
+//import config from '../config';
 //timestamps自动生成和管理createTime和updateTime字段的值
 const UserSchema = mongoose.Schema({
     user_id: {
@@ -20,7 +21,8 @@ const UserSchema = mongoose.Schema({
     avatar: {
         type: String,
         required: true,
-        default: config.pic_server_ip + 'avatar.jpg'
+        default:
+            'https://pwgyy.gz.bcebos.com/aa477801da1e4c189626d647d98d8949.png'
     },
     stype: {
         type: Number, //1猎人，0普通用户，2待审核

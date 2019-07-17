@@ -128,25 +128,13 @@ export default {
             slide: [],
             gameList: [],
             curIndex: 0
-            /*                 swiperOption: {
-                    autoplay: {
-                        delay: 2000,
-                        disableOnInteraction: false
-                    },
-                    speed: 500,
-                    loop: true,
-                    pagination: {
-                        el: '.swiper-pagination',
-                        type: 'bullets',
-                        clickable: true,
-                    },
-                    navigation: {
-                        nextEl: '.swiper-button-next',
-                        prevEl: '.swiper-button-prev',
-                    },
-                    observer: true, //修改swiper自己或子元素时，自动初始化swiper
-                    observeParents: true //修改swiper的父元素时，自动初始化swiper
-                } */
+        };
+    },
+    async asyncData({ $axios }) {
+        const d = await $axios.get("index/index");
+        return {
+            slide: d.data.data.slide,
+            gameList: d.data.data.game
         };
     },
     computed: {
@@ -154,7 +142,7 @@ export default {
     },
 
     methods: {
-        ...mapMutations(["UPDATEDEFAULTKEY"]),
+        //...mapMutations([""]),
         controlPlay(classname) {
             var audio = document.querySelector("." + classname);
             var allAudio = document.querySelectorAll("audio");
@@ -162,23 +150,6 @@ export default {
                 allAudio[i].pause();
             }
             audio.play();
-        },
-        getGameList() {
-            this.$axios
-                .get("/index/index", {
-                    auth: false
-                })
-                .then(data => {
-                    var d = data.data;
-                    if (d.code == 0) {
-                        d = d.data;
-                        this.slide = d.slide;
-                        this.gameList = d.game;
-                        utils.setItem("defaultkey", d.game[0].key);
-                        this.UPDATEDEFAULTKEY(this.gameList[0].key);
-                        this.initSwiper();
-                    }
-                });
         },
         initSwiper() {
             var mySwiper = new Swiper("#slide", {
@@ -198,13 +169,14 @@ export default {
     },
     created() {},
     mounted() {
-        this.getGameList();
+        this.initSwiper();
     }
 };
 </script>
 <style lang="scss">
 #slide {
     position: relative;
+    height: 582px;
 
     /*   .swiper-slide {
             img {

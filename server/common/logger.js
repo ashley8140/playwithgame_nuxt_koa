@@ -38,3 +38,4 @@ export const logger = log4js.getLogger('application'); //记录所有应用级�
 if (config.debug) {
     logger.level = 'debug';
 }
+export const c = 123;
