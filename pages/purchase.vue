@@ -87,6 +87,8 @@
 </template>
 <script>
     export default {
+            middleware: "auth",
+
         data() {
             return {
                 number: 0,

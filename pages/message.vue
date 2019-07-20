@@ -26,6 +26,8 @@
     import utils from '../assets/js/utils.js';;
 
     export default {
+            middleware: "auth",
+
         data() {
             return {
                 page: 1,

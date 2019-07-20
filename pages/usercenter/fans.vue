@@ -48,7 +48,7 @@ export default {
         };
     },
     computed: {
-        ...mapState(["base64"])
+        ...mapState("common", ["base64"])
     },
     components: {
         "v-pagination": pagination

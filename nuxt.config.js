@@ -56,8 +56,7 @@ module.exports = {
         {
             src: '@/plugins/axios',
             ssr: true
-        },
-        { src: '@/plugins/route', ssr: false }
+        }
     ],
 
     /*

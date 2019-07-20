@@ -41,20 +41,20 @@
                         </span>
                     </li>
                 </nuxt-link>
-                <nuxt-link v-if="!assess_token"
+                <nuxt-link v-if="!access_token"
                            exact
                            to="">
                     <li class="nav_item center"
-                        @click="login">
+                        @click="register">
                         <span>登录 | 注册</span>
                     </li>
                 </nuxt-link>
             </ul>
             <!-- 用户信息 -->
             <div class="photo_wrap fr"
-                 v-if="assess_token"
-                 @mouseover="show=true"
-                 @mouseout="show=false">
+                 v-if="!!access_token"
+                 @mouseover="changeShowUserInfo(true)"
+                 @mouseout="changeShowUserInfo(false)">
                 <img class="photo"
                      :src=userInfo.avatar>
                 <img width=15
@@ -62,10 +62,10 @@
                      alt="">
             </div>
             <div class="float_box center"
-                 v-if="assess_token"
-                 :class="{'show': show}"
-                 @mouseover="show=true"
-                 @mouseout="show=false">
+                 v-if="!!access_token"
+                 :class="{'show': showUserInfo}"
+                 @mouseover="changeShowUserInfo(true)"
+                 @mouseout="changeShowUserInfo(false)">
                 <div class="photo1">
                     <img class="img1"
                          :src=userInfo.avatar
@@ -77,22 +77,22 @@
                     <img v-if="userInfo.sex==1"
                          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAATCAMAAABFjsb+AAAAmVBMVEUAAAARev8jgv8igv8ig/8igv8ig/8jgv8igv8ig/8ggP8hff8Yef8jg/8jgv8igv8jgv8hgv8igf8jg/////8lhP9ImP8siP/4+//u9f/j7/+Kvf96tf9co//z+P+s0P+Vw/9WoP8+kv/o8v/m8f/f7f/a6v/M4/+52P+w0/91sv9PnP81jv/T5v/R5f+92v+eyf9rrP9lqP+mm3zdAAAAE3RSTlMACPvIw4/mzoF3IB4V+vnt5ZGQcBXW/wAAANhJREFUGNM1kFeSgzAQREU0YOOw0xIZA85h4/0Pt6Jl94dq5lVrkqKWabhdb8N0qd7yolyc8shzaLV4kaIRWazoChyZhgqdSDA7I5LxG+VXaY0S2fI+2W/dTIdrbSM/U4lQWktzeJadDRMVOmTMs2rldrNxoOIZdUegr7Q8Rpts1Nq+pkR9Alpxom+PvUiLviDasN4Jxr4X/JEF7HvGg273OeF8P7hqKWqMwvm4x9TjMnzirGf28dq3qwAcDat577sU9+HOrrzL7Nz54uTv6KKyNIzzOEwzZv/Doxf+CvtQUwAAAABJRU5ErkJggg=="
                          alt=""></p>
-                <p>id: <span>{{userInfo.openid}} </span></p>
+                <p>id: <span>{{userInfo.open_id}} </span></p>
                 <div v-if="userInfo.stype==0">
                     <ul class="links">
-                        <nuxt-link :to="{name:'order'}"
+                        <nuxt-link :to="{path:'/userCenter/order'}"
                                    tag="li"
                                    class="item">
                             <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAMAAACelLz8AAAAV1BMVEUAAACWlpb/Siz/Sy2ZmZmZmZmXl5eZmZmZmZmZmZmZmZmYmJiWlpaUlJSSkpKZmZn/ORySkpKZmZn/Sy6ZmZn/TC2YmJiXl5eZmZmVlZX/SSSZmZn/TC5se17xAAAAG3RSTlMAQxEi7sgTuKOTkH4lIBgKCQfl09G8sIBwKRVAF2unAAAAdklEQVQoz7XQWQqAMAxF0Rdt6zzP1v2vUxQbRVsEwfsXDoQQANoW9jSe/UUCQEqm6krbEGgTMTl6p/Hz8aXHlTfqFq65kedz8x8/zIWTSB7EP+wNxclJE22lhyiRuRaGMRyUyMJOKmxzWEhRJKICTJdqOWR4bwW3CwvNvfNMTAAAAABJRU5ErkJggg==">
                             <p>订单中心</p>
                         </nuxt-link>
-                        <nuxt-link :to="{name:'join'}"
+                        <nuxt-link :to="{path:'/userCenter/join'}"
                                    tag="li"
                                    class="item">
                             <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAMAAACelLz8AAAAllBMVEUAAAD/LhqZmZmQkJCZmZmZmZmYmJiXl5eYmJiZmZmZmZn/TC6ZmZmZmZmZmZmZmZmXl5eZmZmXl5eZmZn/Sy3/SyyYmJiYmJj/Sy3/TC3/Syz/SCz/SCv/TC2YmJj/Si2Xl5f/TC3/Sy6ZmZn/Sy3/Sy7/Sy6YmJj/Syv/SiyYmJj/SiuYmJj/SCiYmJiZmZn/RCKZmZm5l+S6AAAAMXRSTlMABVUQq26tJ+ulWv768NrPUkofsK5V5Liqo3AnEeucWkLz5OPaz7i3UkpDQSUgd0EPssq46AAAAQJJREFUKM+dktl6gjAQRk8SCKjsiyKodV+qtuX9X64IxlYuvPDcne9PvslMBi7ar+vaCyU3ZOg15usL4Li2AsQysAE7WApA2a4D2qYjcRXKTe72pcFX3JnExBMjyocaw2DIcPCw+t3IE0asiMgyIjwIP42MHZyxObgMQQZJlyxSIF10WRJIwHYPlmXpTaoaUelGN3Zwu25VLKWMHDqcqLFY8Zr+reqY5/lpBm2tya3WuK31k62zoij285L/L9RANhWtXbd5r69qbfo673rTOBZGxKg3w4/pw96Mer982huZrXq7MZtf71Zmfxv13W5UuT2L251yXtFkT3uY70YNq6ziFb/OpxJR4aMR0gAAAABJRU5ErkJggg==">
                             <p>成为陪玩</p>
                         </nuxt-link>
-                        <nuxt-link :to="{name:'purse'}"
+                        <nuxt-link :to="{path:'/userCenter/purse'}"
                                    tag="li"
                                    class="item">
                             <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAMAAACelLz8AAAAb1BMVEUAAACWlpaZmZmZmZmYmJiTk5OSkpKZmZmZmZmZmZmZmZmYmJiZmZmUlJSWlpaVlZWZmZmZmZmZmZmZmZmZmZmZmZn/TC6ZmZn/SiyZmZmYmJiXl5eYmJj/Siv/SS7/SymUlJT/Qyj/QCCZmZn/TC7IpPFRAAAAI3RSTlMAM+XMoRAGqlWL4cJvICIY73prOC3UrJGQhH5iXEg4LCgTCO0GJRwAAACeSURBVCjPfdLZDsIgEIXhw7Booaut+y6+/zOKKYmGDvy3X0LIzCAkFPn/SAnMVVQ3Br9MU1M1i9NI0+5rgoIsjQSgNuCqFWAblloCvGHJ+EDgW5CZRCylU7+VsYSOrss8qPsO9xdLo8TtfWDpYfHcXVmCPGc/P1l1WccSgh7UKlaaRnGGts1Mvriv0Wa3jL0z/G2Ehg4Ac1Exmd5huQ8IIwv9A+OOZgAAAABJRU5ErkJggg==">
@@ -149,7 +149,6 @@ import { mapState, mapMutations, mapActions } from "vuex";
 export default {
     data() {
         return {
-            show: false,
             content: "",
             searchAjax: "",
             searchDebunce: "",
@@ -174,11 +173,12 @@ export default {
         };
     },
     computed: {
-        ...mapState("login", ["assess_token", "userInfo"])
+        ...mapState("login", ["access_token", "userInfo",'showUserInfo'])
     },
 
     methods: {
         ...mapMutations("login", [
+            'updateShowUserInfo',
             "updateLoginBoxStatus",
             "updateOnlineStatus",
             "updateSearchInfo",
@@ -196,8 +196,11 @@ export default {
                 }
             }
         },
-        login() {
+        register() {
             this.updateLoginBoxStatus(true);
+        },
+        changeShowUserInfo(value){
+            this.updateShowUserInfo(value)
         },
         out() {
             this.$axios.post("/Auth/logout").then(d => {
@@ -253,9 +256,6 @@ export default {
     },
     mounted() {
         console.log("nav mounted");
-    },
-    activated() {
-        console.log("nav activated");
     }
 };
 </script>

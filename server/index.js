@@ -1,15 +1,18 @@
 require('colors');
 require('./models');
-import bodyParser from 'koa-bodyparser';
-import json from 'koa-json';
-import session from 'koa-session2';
+require('./middleware/mongoose_log');
+const path = require('path');
+const koaBody = require('koa-body');
+const json = require('koa-json');
+const session = require('koa-session2');
+const cors = require('koa2-cors');
+const Koa = require('koa');
+const { Nuxt, Builder } = require('nuxt');
+const consola = require('consola');
 import requestLog from './middleware/request_log';
 import catchError from './middleware/exceptions';
 import InitManager from './common/init';
-require('./middleware/mongoose_log');
-const Koa = require('koa');
-const consola = require('consola');
-const { Nuxt, Builder } = require('nuxt');
+import myConfig from './config';
 const app = new Koa();
 
 // Import and Set Nuxt.js options
@@ -22,7 +25,22 @@ app.proxy = true; //当 app.proxy 设置为 true 时，支持 X-Forwarded-Host
 app.use(catchError);
 app.use(requestLog);
 
-app.use(bodyParser());
+app.use(cors({ origin: myConfig.app.domain, credentials: true }));
+app.use(
+    koaBody({
+        multipart: true, //支持文件上传
+        jsonLimit: '50mb',
+        urlencoded: true,
+        formidable: {
+            uploadDir: path.join(__dirname, 'public/upload/'), //文件上传目录
+            keepExtensions: true, //保持文件后缀
+            maxFieldsSize: 2 * 1024 * 1024, //文件上传大小
+            onFileBegin: (name, file) => {
+                //文件上传前的设置
+            }
+        }
+    })
+);
 app.use(json()); //自动将我们返回的数据转换为json格式。
 const session_config = {
     key: 'koa:sess',

@@ -3,6 +3,8 @@ import config from '../config';
 import { logger } from '../common/logger';
 const mongoose = require('mongoose');
 const userModel = mongoose.model('User');
+const jwt = require('jsonwebtoken');
+
 export const phoneLogin = async (ctx, next) => {
     const mobile = ctx.request.body.mobile;
     const yzm = Number(ctx.request.body.yzm);
@@ -25,9 +27,8 @@ export const phoneLogin = async (ctx, next) => {
     }
     //生成token
     const token = generateToken(userInfo._id);
-    //console.log('token=>', token);
     ctx.cookies.set('access_token', token, {
-        maxAge: config.jwt.expiresIn * 1000,
+        maxAge: 86400000,
         httpOnly: true
     });
     ctx.body = {
@@ -52,4 +53,18 @@ export const logout = async (ctx, next) => {
     ctx.body = {
         code: 200
     };
+};
+export const getUser = async (ctx, next) => {
+    const token = ctx.headers.token;
+    try {
+        const decoded = jwt.verify(token, config.jwt.secret);
+        const userInfo = await userModel.findById(decoded.data).exec();
+        ctx.body = {
+            code: 200,
+            userInfo: userInfo
+        };
+    } catch (err) {
+        logger.error(err);
+        ctx.body = { code: -1, message: 'token无效' };
+    }
 };

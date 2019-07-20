@@ -145,7 +145,7 @@
             }
         },
         computed: {
-            ...mapState(['showLoginBox'])
+            ...mapState('login',['showLoginBox'])
         },
         methods: {
             upload(ref) {

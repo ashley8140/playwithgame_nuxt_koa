@@ -10,6 +10,7 @@ const UserSchema = mongoose.Schema(
         },
         open_id: {
             type: String,
+            default: 1111111111,
             trim: true
         },
         nickname: {

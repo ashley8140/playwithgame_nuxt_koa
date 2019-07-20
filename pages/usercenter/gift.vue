@@ -91,7 +91,7 @@
             'v-pagination': pagination
         },
         computed: {
-            ...mapState(['userInfo'])
+            ...mapState('login',['userInfo'])
         },
         methods: {
             close() {

@@ -142,7 +142,7 @@ export default {
         };
     },
     computed: {
-        ...mapState(["userInfo"])
+        ...mapState('login',["userInfo"])
     },
     methods: {
         ...mapMutations(["SHOWLOGIN"]),

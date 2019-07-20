@@ -46,7 +46,7 @@
                             </label>
                         </div>
                         <div class="send"
-                             @click='login'>登陆</div>
+                             @click='register'>登陆</div>
                         <div class="else">
                             <p class="p1">其他登陆方式</p>
                             <div>
@@ -87,7 +87,8 @@ export default {
         ...mapMutations("login", [
             "updateLoginBoxStatus",
             "updateUserInfo",
-            "updateToken"
+            "updateToken",
+            'updateShowUserInfo'
         ]),
         checkPhone() {
             var mobile = this.mobile.trim();
@@ -147,7 +148,7 @@ export default {
                     this.$toast.error(error);
                 });
         },
-        login() {
+        register() {
             if (!this.checkPhone()) {
                 return;
             }
@@ -168,18 +169,18 @@ export default {
                         d.online_status //0为下线，1为在线
                     */
                 var d = data.data;
-                console.log(d);
                 if (d.code == 200) {
                     this.updateToken(d.access_token);
                     this.updateLoginBoxStatus(false);
                     this.updateUserInfo(d.userInfo);
+                    this.updateShowUserInfo(false)
                 } else {
                     this.$toast.error(d.message);
                 }
             });
         },
         close() {
-            this.SHOWLOGIN(false);
+            this.updateLoginBoxStatus(false);
         }
     },
     mounted() {}

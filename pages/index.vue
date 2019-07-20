@@ -131,19 +131,17 @@ export default {
         };
     },
     async asyncData({ $axios }) {
-        const d = await $axios.get("index/index");
+        const { data } = await $axios.get("index/index");
         return {
-            slide: d.data.data.slide,
-            gameList: d.data.data.game
+            slide: data.data.slide,
+            gameList: data.data.game
         };
     },
     computed: {
-        ...mapState("common", ["v_level", "base64"]),
-        ...mapState(["hasToken", "defaultkey"])
+        ...mapState("common", ["v_level", "base64"])
     },
 
     methods: {
-        //...mapMutations([""]),
         controlPlay(classname) {
             var audio = document.querySelector("." + classname);
             var allAudio = document.querySelectorAll("audio");
@@ -169,12 +167,9 @@ export default {
         }
     },
     beforeCreate() {},
-    created() {
-        console.log("server created");
-    },
+    created() {},
     mounted() {
         this.initSwiper();
-        console.log("server mounted");
     }
 };
 </script>

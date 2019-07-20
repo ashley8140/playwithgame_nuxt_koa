@@ -6,12 +6,13 @@ const catchError = async (ctx, next) => {
         if (error.errorCode) {
             ctx.body = {
                 message: error.msg,
-                error_code: error.errorCode,
+                code: error.code,
                 request: `${ctx.method} ${ctx.path}`
             };
         } else {
             ctx.body = {
-                msg: 'we made a mistake'
+                code: '-1',
+                message: '操作出现错误'
             };
         }
     }
