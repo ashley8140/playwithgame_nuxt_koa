@@ -1,9 +1,6 @@
-import mongoose from 'mongoose'
+import mongoose from 'mongoose';
 
 const ServiceSchema = mongoose.Schema({
-    user_id: {
-        type: ObjectId
-    },
     service_id: {
         type: Number
     },
@@ -31,6 +28,6 @@ const ServiceSchema = mongoose.Schema({
     tags: {
         type: String
     }
-})
+});
 
-export default mongoose.model('Service', ServiceSchema)
+mongoose.model('Service', ServiceSchema);

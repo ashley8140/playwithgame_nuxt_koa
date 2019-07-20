@@ -24,7 +24,7 @@ export default {
         Float
     },
     computed: {
-        ...mapState(["showLoginBox"])
+        ...mapState("login", ["showLoginBox"])
     },
     mounted() {}
 };

@@ -313,7 +313,7 @@ export default {
         "v-pagination": pagination
     },
     computed: {
-        ...mapState(["level", "base64", "v_level"])
+        ...mapState('common',["level", "base64", "v_level"])
     },
     methods: {
         pagechange: function(currentPage) {

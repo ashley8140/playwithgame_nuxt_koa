@@ -138,7 +138,8 @@ export default {
         };
     },
     computed: {
-        ...mapState(["hasToken", "v_level", "base64", "defaultkey"])
+        ...mapState("common", ["v_level", "base64"]),
+        ...mapState(["hasToken", "defaultkey"])
     },
 
     methods: {
@@ -167,9 +168,13 @@ export default {
             });
         }
     },
-    created() {},
+    beforeCreate() {},
+    created() {
+        console.log("server created");
+    },
     mounted() {
         this.initSwiper();
+        console.log("server mounted");
     }
 };
 </script>

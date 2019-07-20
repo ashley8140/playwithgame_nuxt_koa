@@ -1,8 +1,17 @@
 const path = require('path');
+const isPro = process.env.NODE_ENV === 'production';
 export default {
     debug: true,
-    ENV: process.env.NODE_ENV || 'development',
-    dbs: 'mongodb://127.0.0.1:27017/playwithgame',
+    mongodb: {
+        host: '127.0.0.1',
+        database: 'playwithgame',
+        port: 27017,
+        user: '',
+        pass: ''
+    },
+    app: {
+        domain: isPro ? 'http://59.110.136.104/' : 'http://127.0.0.1:5001'
+    },
     redis: {
         get host() {
             return '127.0.0.1';
@@ -11,6 +20,12 @@ export default {
             return 6379;
         }
     },
+    jwt: {
+        secret: 'ashley8140',
+        expiresIn: '24h'
+    },
     log_dir: path.join(__dirname, 'logs'),
-    WX_OAUTH: {}
+    wx: {},
+    qq: {},
+    seo: {}
 };

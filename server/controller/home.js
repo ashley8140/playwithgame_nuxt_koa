@@ -1,13 +1,6 @@
-//首页
-import Router from 'koa-router';
-import { authUser } from '../../middleware/auth';
-let router = new Router({
-    prefix: '/v1/index'
-});
-//首页数据
-router.get('/index', (ctx, next) => {
+export const homeData = async (ctx, next) => {
     ctx.body = {
-        code: 0,
+        code: 200,
         message: 'success',
         data: {
             slide: [
@@ -427,11 +420,10 @@ router.get('/index', (ctx, next) => {
             ]
         }
     };
-});
-//找陪玩陪玩者列表
-router.get('/lists', async (ctx, next) => {
+};
+export const listData = async (ctx, next) => {
     ctx.body = {
-        code: 0,
+        code: 200,
         message: 'success',
         data: {
             game: {
@@ -839,6 +831,4 @@ router.get('/lists', async (ctx, next) => {
             info_pages: 1
         }
     };
-});
-
-export default router;
+};

@@ -4,9 +4,10 @@ import toast from '../components/toast';
 export default function({ $axios, redirect }) {
     $axios.defaults.timeout = 30000;
     $axios.defaults.auth = true;
-    $axios.onRequest(config => {
-        //console.log('config' + config.headers);
-    });
+    if (process.browser) {
+        $axios.setToken(utils.getItem('access_token'));
+    }
+    $axios.onRequest(config => {});
 
     /* 
     $axios.interceptors.request.use(

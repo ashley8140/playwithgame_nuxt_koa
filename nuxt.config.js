@@ -1,10 +1,8 @@
 const pkg = require('./package');
+import config from './server/config';
+process.env.DOMAIN = config.app.domain;
 module.exports = {
     mode: 'universal',
-
-    /*
-     ** Headers of the page
-     */
     head: {
         title: '约玩_游戏陪玩_妹子陪玩_大神陪玩_导师陪玩',
         meta: [

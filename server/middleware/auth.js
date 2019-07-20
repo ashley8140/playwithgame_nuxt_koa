@@ -10,11 +10,11 @@ export const userRequired = (ctx, next) => {};
 export const authUser = async (ctx, next) => {
     let token = ctx.request.get('Authorization');
     //console.log('output: authUser -> token', token);
-    let cert = fs.readFileSync(
-        path.resolve(__dirname, '../config/jwt_pub.pem')
-    );
+    // let cert = fs.readFileSync(
+    //     path.resolve(__dirname, '../config/jwt_pub.pem')
+    // );
     try {
-        const decoded = await jwt.verify(token, cert);
+        const decoded = await jwt.verify(token, config.jwt.secret);
         console.log('output: authUser -> decoded', decoded);
         next();
     } catch (e) {

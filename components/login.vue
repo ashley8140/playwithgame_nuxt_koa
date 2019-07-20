@@ -82,15 +82,12 @@ export default {
             time: 0
         };
     },
-    computed: {
-        ...mapState(["showLoginBox"])
-    },
+    computed: {},
     methods: {
-        ...mapMutations([
-            "SHOWLOGIN",
-            "UPDATETOKEN",
-            "UPDATEUSERINFOR",
-            "UPDATEACCESSTOKEN"
+        ...mapMutations("login", [
+            "updateLoginBoxStatus",
+            "updateUserInfo",
+            "updateToken"
         ]),
         checkPhone() {
             var mobile = this.mobile.trim();
@@ -132,7 +129,7 @@ export default {
                 .post("/Auth/sendPhoneCode", d)
                 .then(data => {
                     var d = data.data;
-                    if (d.code == 0) {
+                    if (d.code == 200) {
                         this.$toast.success(d.message);
                     } else if (d.code == 401) {
                         //重新登录
@@ -171,16 +168,11 @@ export default {
                         d.online_status //0为下线，1为在线
                     */
                 var d = data.data;
-                if (d.code == 0) {
-                    var obj = JSON.stringify(d.data);
-                    utils.setItem("userInfo", obj);
-                    // this.UPDATEACCESSTOKEN({
-                    //     access_token: d.data.token.access_token,
-                    //     user_id: d.data.userInfo.user_id
-                    // });
-                    this.UPDATEACCESSTOKEN(d.data.token.access_token);
-                    this.UPDATETOKEN(true);
-                    this.UPDATEUSERINFOR(d.data);
+                console.log(d);
+                if (d.code == 200) {
+                    this.updateToken(d.access_token);
+                    this.updateLoginBoxStatus(false);
+                    this.updateUserInfo(d.userInfo);
                 } else {
                     this.$toast.error(d.message);
                 }

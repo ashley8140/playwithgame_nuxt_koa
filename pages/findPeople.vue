@@ -207,7 +207,7 @@ export default {
                 })
                 .then(data => {
                     var d = data.data;
-                    if (d.code == 0) {
+                    if (d.code == 200) {
                         this.gamelist = d.data.game;
                         this.restart_key = this.gamelist[
                             Object.keys(this.gamelist)[0]
