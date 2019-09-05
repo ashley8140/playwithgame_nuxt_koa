@@ -170,6 +170,7 @@ export default {
                     */
                 var d = data.data;
                 if (d.code == 200) {
+                    this.$axios.setHeader('Authorization', d.access_token)
                     this.updateToken(d.access_token);
                     this.updateLoginBoxStatus(false);
                     this.updateUserInfo(d.userInfo);

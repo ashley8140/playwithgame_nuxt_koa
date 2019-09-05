@@ -419,9 +419,10 @@ export const homeData = async (ctx, next) => {
                 }
             ]
         }
-    };
-};
+    }
+}
 export const listData = async (ctx, next) => {
+    //console.log('authorization=>', ctx.headers)
     ctx.body = {
         code: 200,
         message: 'success',
@@ -830,5 +831,5 @@ export const listData = async (ctx, next) => {
             ],
             info_pages: 1
         }
-    };
-};
+    }
+}

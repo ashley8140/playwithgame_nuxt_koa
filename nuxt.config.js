@@ -1,6 +1,6 @@
-const pkg = require('./package');
-import config from './server/config';
-process.env.DOMAIN = config.app.domain;
+const pkg = require('./package')
+import config from './server/config'
+process.env.DOMAIN = config.app.domain
 module.exports = {
     mode: 'universal',
     head: {
@@ -54,7 +54,7 @@ module.exports = {
             ssr: false
         },
         {
-            src: '@/plugins/axios',
+            src: '~/plugins/axios',
             ssr: true
         }
     ],
@@ -91,4 +91,4 @@ module.exports = {
         //extendRoutes: routes
         //middleware: ['authorities']
     }
-};
+}

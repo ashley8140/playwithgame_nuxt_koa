@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from 'mongoose'
 
 const GiftSchema = mongoose.Schema({
     user_id: {
@@ -29,6 +29,6 @@ const GiftSchema = mongoose.Schema({
     sort: {
         type: Number
     }
-});
+})
 
-mongoose.model('gift', GiftSchema);
+mongoose.model('gift', GiftSchema)
