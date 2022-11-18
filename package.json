@@ -33,7 +33,7 @@
         "log4js": "^4.4.0",
         "mongoose": "^5.5.2",
         "mongoose-auto-increment-fix": "^5.0.2",
-        "nuxt": "^2.4.0",
+        "nuxt": "^2.15.8",
         "passport-local": "^1.0.0",
         "require-all": "^3.0.0",
         "require-directory": "^2.1.1",
